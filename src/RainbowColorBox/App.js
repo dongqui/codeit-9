@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import ColorBox from "./ColorBox";
 import ResetButton from "./ResetButton";
+import ErrorMessage from "./ErrorMessage";
 
 import "./App.css";
 
@@ -19,6 +20,7 @@ function App() {
       </div>
       <ColorBox color={color} />
       <ResetButton onClick={handleClickReset} />
+      <ErrorMessage color={color} />
     </div>
   );
 }
