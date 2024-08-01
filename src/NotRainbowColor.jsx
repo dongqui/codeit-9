@@ -11,7 +11,7 @@ const RAINBOW_COLORS = [
 export default function NotRainbowColor({ color }) {
   return (
     <div>
-      {RAINBOW_COLORS.includes(color) ? (
+      {color && RAINBOW_COLORS.includes(color) ? (
         <p>무지개 색입니다.</p>
       ) : (
         <p>무지개 색이 아닙니다.</p>
