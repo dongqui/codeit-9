@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <h1>무지개색 상자</h1>
       <div>
-        <input />
+        <input/>
       </div>
       <ColorBox />
     </div>
