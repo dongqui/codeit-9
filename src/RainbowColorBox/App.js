@@ -1,8 +1,8 @@
 import ColorBox from "./ColorBox";
 import ResetButton from "./ResetButton";
-
 import "./App.css";
 import { useState } from "react";
+import NotRainbowColor from "./NotRainbowColor";
 
 function App() {
   const [color, setColor] = useState("");
@@ -15,24 +15,15 @@ function App() {
     setColor("");
   };
 
-  const RAINBOW_COLORS = [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "navy",
-    "purple",
-  ];
-
   return (
     <div className="App">
       <h1>무지개색 상자</h1>
       <div>
-        <input type="text" onChange={saveColorValue} />
+        <input type="text" onChange={saveColorValue} value={color} />
       </div>
       <ColorBox color={color} />
-      <ResetButton onClick={colorReset}>리셋 버튼</ResetButton>
+      <ResetButton onClick={colorReset} />
+      <NotRainbowColor color={color} />
     </div>
   );
 }

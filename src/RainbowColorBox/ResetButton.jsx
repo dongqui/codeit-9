@@ -1,5 +1,5 @@
-function ResetButton({ resetColor }) {
-  return <button onClick={resetColor}>초기화</button>;
+function ResetButton({ onClick }) {
+  return <button onClick={onClick}>초기화</button>;
 }
 
 export default ResetButton;
