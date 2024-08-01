@@ -3,7 +3,6 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  // 상태값 정의 -> 상태값 변경 -> 컬러박스 변화
   const [color, setColor] = useState('');
 
   // 상태값 변경 함수
