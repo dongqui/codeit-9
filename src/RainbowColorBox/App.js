@@ -1,24 +1,23 @@
-import { useRef } from "react";
+import { useState } from "react";
 import ColorBox from "./ColorBox";
 import "./App.css";
 
 // color (red, #ff0000 2가지)
 // 상태값 정의, 컬러 박스 변경
 function App() {
-  const textRef = useRef();
-  let color = "";
+  const [color, setColor] = useState("");
 
-  const handleKeyDown = (e) => {
-    color = textRef.current.value.trim();
+  const handleChangeInput = (e) => {
+    setColor(e.currentTarget.value);
   };
 
   return (
     <div className="App">
       <h1>무지개색 상자</h1>
       <div>
-        <input type="text" ref={textRef} onKeyDown={handleKeyDown} />
+        <input type="text" onChange={handleChangeInput} />
       </div>
-      <ColorBox props={color} />
+      <ColorBox color={color} />
     </div>
   );
 }
