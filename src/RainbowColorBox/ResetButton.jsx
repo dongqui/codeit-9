@@ -1,6 +1,5 @@
 function ResetButton({ resetColor }) {
-  const Reset = () => resetColor();
-  return <ResetButton onClick={reset}></ResetButton>;
+  return <button onClick={resetColor}>초기화</button>;
 }
 
 export default ResetButton;

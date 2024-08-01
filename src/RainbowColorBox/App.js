@@ -15,6 +15,16 @@ function App() {
     setColor("");
   };
 
+  const RAINBOW_COLORS = [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "navy",
+    "purple",
+  ];
+
   return (
     <div className="App">
       <h1>무지개색 상자</h1>
