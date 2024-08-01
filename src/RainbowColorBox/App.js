@@ -3,7 +3,7 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  const [color, setColor] = useState('');
+  const [color, setColor] = useState('white');
 
   // 상태값 변경 함수
   const onChange = (e) => {
