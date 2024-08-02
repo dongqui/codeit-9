@@ -2,6 +2,10 @@ import ColorBox from "./ColorBox";
 
 import "./App.css";
 
+const Color = {
+  
+}
+
 function App() {
   return (
     <div className="App">
