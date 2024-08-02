@@ -1,20 +1,20 @@
 import ColorBox from "./ColorBox";
 
 import "./App.css";
+import { useState } from "react";
 
 function App() {
-  const inputTextColor = color => {
-    if (input.value) {
-      ColorBox;
-    } else if (input.value === '') {
-      ColorBox;
-    }
+  const [color, setColor] = useState();
+
+  const inputOnChange = e => {
+    setColor(e.currentTarget.value);
   };
+  
   return (
     <div className="App">
       <h1>무지개색 상자</h1>
       <div>
-        <input onInput={inputTextColor} />
+        <input onChange={inputOnChange} />
       </div>
       <ColorBox />
     </div>
