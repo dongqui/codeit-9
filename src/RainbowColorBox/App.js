@@ -8,7 +8,7 @@ function App() {
 
   function colorChange() {
     const inputValue = document.querySelector(".colorInput");
-    setColor(inputValue);
+    setColor(inputValue.value);
   }
 
   return (
