@@ -7,7 +7,7 @@ function App() {
   const [color, setColor] = useState();
 
   function handleColor(event) {
-    setColor(event.target.value);
+    setColor(event.currentTarget.value);
   }
 
   return (
