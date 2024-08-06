@@ -3,12 +3,9 @@ export default function ResetButton({ click }) {
     <button
       type="button"
       style={{
-        height: "30px",
-        width: "100px",
-        border: "1px",
         cursor: "pointer",
       }}
-      onClick={(click = () => "")}
+      onClick={click}
     >
       초기화
     </button>
