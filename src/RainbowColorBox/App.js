@@ -6,20 +6,25 @@ import "./App.css";
 function App() {
   const [color, setColor] = useState('')
 
-  const saveColor = event => {
+  const saveColor = (event) => {
     setColor(event.target.value);
-    // console.log(event.target.value);
   };
 
-    return (
+  const resetColor = () => {
+    setColor('')
+  }
 
-    <div className="App">
+    return (
+    <>
+      <div className="App">
       <h1>무지개색 상자</h1>
       <div>
         <input onChange={saveColor}/>
       </div>
-      <ColorBox ColorBox={color}/>
+      <ColorBox color={color}/>
+      <button onClick={resetColor}>초기화</button>
     </div>
+  </>
   );
 }
 
