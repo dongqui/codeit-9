@@ -13,8 +13,7 @@ function App() {
   };
 
   const handleClickInput = (e) => {
-    e.preventDefault();
-    setColor("");
+    setColor(e.currentTarget.value);
   };
 
   return (
