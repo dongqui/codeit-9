@@ -7,6 +7,6 @@ export default function ColorBox({ color }) {
         width: '200px',
         border: '2px dashed black',
       }}
-    />
+    ></div>
   );
 }

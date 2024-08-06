@@ -10,6 +10,7 @@ function App() {
   const onChange = (e) => {
     setColor(e.target.value);
   };
+  const handleResetClick = () => setColor('white');
 
   return (
     <div className="App">
@@ -18,7 +19,7 @@ function App() {
         <input onChange={onChange} />
       </div>
       <ColorBox color={color} />
-      <ResetButton color={color} />
+      <ResetButton onClick={handleResetClick} />
     </div>
   );
 }
