@@ -14,10 +14,9 @@ export default function ErrorElement({ color }) {
   const [isRainbow, setIsRainbow] = useState(false);
 
   function checkRainbow() {
-    if (RAINBOW_COLORS.includes(color)) {
-      setIsRainbow(true);
-    } else {
-      setIsRainbow(false);
+    const isColorInRainbow = RAINBOW_COLORS.includes(color);
+    if (isColorInRainbow !== isRainbow) {
+      setIsRainbow(isColorInRainbow);
     }
   }
 
