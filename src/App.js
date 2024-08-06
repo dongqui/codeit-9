@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ColorBox from "./ColorBox";
+import ResetButton from "./ResetButton";
 import "./App.css";
 
 // color (red, #ff0000 2가지)
@@ -11,6 +12,11 @@ function App() {
     setColor(e.currentTarget.value);
   };
 
+  const handleClickInput = (e) => {
+    e.preventDefault();
+    setColor("");
+  };
+
   return (
     <div className="App">
       <h1>무지개색 상자</h1>
@@ -18,6 +24,7 @@ function App() {
         <input type="text" onChange={handleChangeInput} />
       </div>
       <ColorBox color={color} />
+      <ResetButton onClick={handleClickInput} />
     </div>
   );
 }
