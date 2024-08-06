@@ -1,13 +1,13 @@
 import ColorBox from "./ColorBox";
 import { useState } from "react";
+import ResetButton from "./ResetButton";
+
 import "./App.css";
 
 function App() {
   const [color, setColor] = useState('white');
 
-  const changeColor = (e) => {
-    setColor(e.target.value);
-  }
+  let changeColor = (e) => setColor(e.currentTarget.value);
 
   function resetColor() {
     setColor('white');
@@ -20,7 +20,7 @@ function App() {
         <input onChange={changeColor} />
       </div>
       <ColorBox color={color} />
-      <button onClick={resetColor}>초기화</button>
+      <ResetButton setColor={setColor} />
     </div>
   );
 }
