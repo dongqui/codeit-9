@@ -5,7 +5,7 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  const [color, setColor] = useState();
+  const [color, setColor] = useState('');
 
   const inputOnChange = e => {
     setColor(e.currentTarget.value);
@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <h1>무지개색 상자</h1>
       <div>
-        <input onChange={inputOnChange} />
+        <input type="text" value={color} onChange={inputOnChange} />
       </div>
       <ColorBox color={color} />
       <ResetButton onclick={handleClickReset} />
