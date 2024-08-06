@@ -1,6 +1,5 @@
 function ResetButton(onClick) {
-  const handleClick = onClick;
-  return <div>초기화</div>;
+  return <button onClick={onClick}>초기화</button>;
 }
 
 export default ResetButton;
