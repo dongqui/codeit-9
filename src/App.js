@@ -1,8 +1,8 @@
 import { useState } from "react";
 import ColorBox from "./ColorBox";
 import ResetButton from "./ResetButton";
-import "./App.css";
 import ErrorBox from "./ErrorBox";
+import "./App.css";
 
 // color (red, #ff0000 2가지)
 // 상태값 정의, 컬러 박스 변경

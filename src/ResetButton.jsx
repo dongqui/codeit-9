@@ -1,13 +1,3 @@
-export default function ResetButton({ click }) {
-  return (
-    <button
-      type="button"
-      style={{
-        cursor: "pointer",
-      }}
-      onClick={click}
-    >
-      초기화
-    </button>
-  );
+export default function ResetButton({ onClick }) {
+  return <button onClick={onClick}>초기화</button>;
 }
