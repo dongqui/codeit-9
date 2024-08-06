@@ -13,7 +13,7 @@ function App() {
     setColor(e.currentTarget.value);
   };
 
-  const handleClickInput = () => setColor("");
+  const handleClickInput = () => setColor("#FFFFFF");
 
   return (
     <div className="App">
