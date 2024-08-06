@@ -16,7 +16,7 @@ function App() {
       setColor(newColor);
       setError('');
     } else {
-      setError('Error: 색상이 유효하지 않습니다.');
+      setError('무지개 색이 아닙니다');
     }
   };
 
