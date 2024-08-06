@@ -1,10 +1,13 @@
 import ColorBox from "./ColorBox";
-import { useState } from "react";
+import ErrorMessage from "./ErrorMessage";
+import { useState, } from "react";
+
 
 import "./App.css";
 
 function App() {
   const [color, setColor] = useState('')
+
 
   const saveColor = (event) => {
     setColor(event.target.value);
@@ -12,6 +15,7 @@ function App() {
 
   const resetColor = () => {
     setColor('')
+    
   }
 
     return (
@@ -23,6 +27,7 @@ function App() {
       </div>
       <ColorBox color={color}/>
       <button onClick={resetColor}>초기화</button>
+      <ErrorMessage color={color} />
     </div>
   </>
   );
