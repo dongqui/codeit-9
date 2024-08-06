@@ -20,9 +20,10 @@ export default function ErrorElement({ color }) {
     }
   }
 
-  useEffect(() => {
-    checkRainbow();
-  }, [color]);
+  // useEffect(() => {
+  //   checkRainbow();
+  // }, [color]);
 
+  checkRainbow();
   return <>{!isRainbow && <p>무지개 색깔이 아닙니다.</p>}</>;
 }
