@@ -2,6 +2,7 @@ import ColorBox from "./ColorBox";
 
 import "./App.css";
 import { useState } from "react";
+import ResetButton from "./ResetButton";
 
 function App() {
   const [color, setColor] = useState();
@@ -17,6 +18,7 @@ function App() {
         <input onChange={handleColor} />
       </div>
       <ColorBox color={color} />
+      <ResetButton onClick={setColor} />
     </div>
   );
 }
