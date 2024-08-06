@@ -1,36 +1,19 @@
-import ColorBox from "./ColorBox";
-
 import "./App.css";
 import { useState } from "react";
+import ColorBox from "./ColorBox";
 import ResetButton from "./ResetButton";
-
-const RAINBOW_COLORS = [
-  "red",
-  "orange",
-  "yellow",
-  "green",
-  "blue",
-  "navy",
-  "purple",
-];
+import ErrorMessage from "./ErrorMessage";
 
 function App() {
   const [color, setColor] = useState("white");
 
-  function colorChange(e) {
+  const colorChange = (e) => {
     setColor(e.currentTarget.value);
-    if (!RAINBOW_COLORS.includes(e.currentTarget.value)) {
-      const message = document.querySelector(".message");
-      message.innerHTML = "무지개색이 아닙니다.";
-    } else {
-      const message = document.querySelector(".message");
-      message.innerHTML = "";
-    }
-  }
+  };
 
-  function handleClickReset() {
+  const handleClickReset = () => {
     setColor("");
-  }
+  };
 
   return (
     <div className="App">
@@ -39,7 +22,7 @@ function App() {
         <input onChange={colorChange} />
       </div>
       <ColorBox color={color} />
-      <p className="message"></p>
+      <ErrorMessage color={color} />
       <ResetButton onClick={handleClickReset} />
     </div>
   );
