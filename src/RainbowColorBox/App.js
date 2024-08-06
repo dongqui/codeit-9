@@ -1,5 +1,6 @@
 import ColorBox from './ColorBox';
-
+import ResetButton from './ResetButton';
+import ErrorMessage from './ErrorMessage';
 import './App.css';
 import { useState } from 'react';
 
@@ -10,14 +11,17 @@ function App() {
     setColor(e.currentTarget.value);
   };
 
+  const handleClickReset = () => setColor('');
+
   return (
     <div className="App">
       <h1>무지개색 상자</h1>
       <div>
         <input onChange={inputOnChange} />
       </div>
-      <ColorBox />
-      <ResetButton />
+      <ColorBox color={color} />
+      <ResetButton onclick={handleClickReset} />
+      <ErrorMessage color={color} />
     </div>
   );
 }

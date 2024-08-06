@@ -1,15 +1,5 @@
-import ColorBox from './ColorBox';
-
-function ResetButton() {
-  const ResetButtonClick = color => {
-    color;
-  };
-
-  return (
-    <>
-      <button onClick={ResetButtonClick}></button>
-    </>
-  );
+function ResetButton({ onclick }) {
+  return <button onClick={onclick}>초기화</button>;
 }
 
 export default ResetButton;
