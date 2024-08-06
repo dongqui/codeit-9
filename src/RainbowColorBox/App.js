@@ -1,6 +1,7 @@
-import ColorBox from "./ColorBox";
 import { useState } from "react";
+import ColorBox from "./ColorBox";
 import ResetButton from "./ResetButton";
+import PrintErrorMessage from "./PrintErrorMessage";
 
 import "./App.css";
 
@@ -21,6 +22,7 @@ function App() {
       </div>
       <ColorBox color={color} />
       <ResetButton setColor={setColor} />
+      <PrintErrorMessage currentColor={color} />
     </div>
   );
 }
