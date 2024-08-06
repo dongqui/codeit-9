@@ -6,6 +6,8 @@ import { ResetButton } from './ResetButton';
 function App() {
   const [color, setColor] = useState('white');
 
+  const RAINBOW_COLORS = ['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple'];
+
   // 상태값 변경 함수
   const onChange = (e) => {
     setColor(e.target.value);
@@ -20,6 +22,9 @@ function App() {
       </div>
       <ColorBox color={color} />
       <ResetButton onClick={handleResetClick} />
+      {RAINBOW_COLORS.map((color) => (
+        <div>{color}</div>
+      ))}
     </div>
   );
 }

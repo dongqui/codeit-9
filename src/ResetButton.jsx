@@ -1,9 +1,11 @@
 import './App.css';
 
-export const ResetButton = ({ color }) => {
+export const ResetButton = ({ handleResetClick }) => {
   return (
     <div>
-      <button className="Reset-button">Reset</button>
+      <button onClick={handleResetClick} className="Reset-button">
+        Reset
+      </button>
     </div>
   );
 };
