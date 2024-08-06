@@ -1,9 +1,9 @@
 import './App.css';
 
-export const ResetButton = ({ handleResetClick }) => {
+export const ResetButton = ({ onClick }) => {
   return (
     <div>
-      <button onClick={handleResetClick} className="Reset-button">
+      <button onClick={onClick} className="Reset-button">
         Reset
       </button>
     </div>

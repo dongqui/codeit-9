@@ -5,24 +5,17 @@ import { ResetButton } from './ResetButton';
 
 function App() {
   const [color, setColor] = useState('white');
-  const [error, setError] = useState('');
-
   const RAINBOW_COLORS = ['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple'];
+  const error = RAINBOW_COLORS.includes(color) ? '' : '무지개 색이 아닙니다';
 
   // 상태값 변경 함수
   const onChange = (e) => {
-    const newColor = e.target.value;
-    if (RAINBOW_COLORS.includes(newColor)) {
-      setColor(newColor);
-      setError('');
-    } else {
-      setError('무지개 색이 아닙니다');
-    }
+    const color = e.target.value;
+    setColor(color);
   };
 
   const handleResetClick = () => {
     setColor('white');
-    setError('');
   };
 
   return (
