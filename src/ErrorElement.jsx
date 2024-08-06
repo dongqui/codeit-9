@@ -11,19 +11,19 @@ const RAINBOW_COLORS = [
 ];
 
 export default function ErrorElement({ color }) {
-  const [isRainbow, setIsRainbow] = useState(false);
+  const isRainbow = RAINBOW_COLORS.includes(color);
 
-  function checkRainbow() {
-    const isColorInRainbow = RAINBOW_COLORS.includes(color);
-    if (isColorInRainbow !== isRainbow) {
-      setIsRainbow(isColorInRainbow);
-    }
-  }
+  // function checkRainbow() {
+  //   const isColorInRainbow = RAINBOW_COLORS.includes(color);
+  //   if (isColorInRainbow !== isRainbow) {
+  //     setIsRainbow(isColorInRainbow);
+  //   }
+  // }
 
   // useEffect(() => {
   //   checkRainbow();
   // }, [color]);
 
-  checkRainbow();
+  // checkRainbow();
   return <>{!isRainbow && <p>무지개 색깔이 아닙니다.</p>}</>;
 }
