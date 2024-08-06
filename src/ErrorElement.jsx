@@ -11,7 +11,7 @@ const RAINBOW_COLORS = [
 ];
 
 export default function ErrorElement({ color }) {
-  const isRainbow = RAINBOW_COLORS.includes(color);
+  const isColorInRainbow = RAINBOW_COLORS.includes(color);
 
   // function checkRainbow() {
   //   const isColorInRainbow = RAINBOW_COLORS.includes(color);
@@ -25,5 +25,5 @@ export default function ErrorElement({ color }) {
   // }, [color]);
 
   // checkRainbow();
-  return <>{!isRainbow && <p>무지개 색깔이 아닙니다.</p>}</>;
+  return <>{!isColorInRainbow && <p>무지개 색깔이 아닙니다.</p>}</>;
 }
