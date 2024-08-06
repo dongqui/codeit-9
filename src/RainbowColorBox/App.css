@@ -43,6 +43,14 @@ input {
   color: #61dafb;
 }
 
+.Reset-button {
+  padding: 8px;
+  font-size: 16px;
+  background-color: #282c34;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
