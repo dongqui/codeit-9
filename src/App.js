@@ -2,6 +2,7 @@ import { useState } from "react";
 import ColorBox from "./ColorBox";
 import ResetButton from "./ResetButton";
 import "./App.css";
+import ErrorBox from "./ErrorBox";
 
 // color (red, #ff0000 2가지)
 // 상태값 정의, 컬러 박스 변경
@@ -12,9 +13,7 @@ function App() {
     setColor(e.currentTarget.value);
   };
 
-  const handleClickInput = (e) => {
-    setColor(e.currentTarget.value);
-  };
+  const handleClickInput = () => setColor("");
 
   return (
     <div className="App">
@@ -24,6 +23,7 @@ function App() {
       </div>
       <ColorBox color={color} />
       <ResetButton onClick={handleClickInput} />
+      <ErrorBox color={color} />
     </div>
   );
 }
