@@ -1,10 +1,9 @@
-import { useState } from "react";
-
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
+import useTodoList from "./useTodoList";
 
 export default function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useTodoList();
 
   const addTodo = (newTodo) => setTodoList([newTodo, ...todoList]);
   const deleteTodo = (id) =>
@@ -14,6 +13,7 @@ export default function App() {
       todoList.map((todo) => (todo.id === editedTodo.id ? editedTodo : todo))
     );
   };
+
   return (
     <div>
       <TodoInput onAddClick={addTodo} />
