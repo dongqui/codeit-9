@@ -1,16 +1,9 @@
-export default function TodoItem(key, title) {
-  const handleDeleteClick = () => {};
-  const handleUpdateClick = () => {};
-
+export default function TodoItem({ key, text }) {
   return (
     <li key={key}>
-      {title}
-      <button type="button" onClick={handleDeleteClick}>
-        삭제
-      </button>
-      <button type="button" onClick={handleUpdateClick}>
-        수정
-      </button>
+      {text}
+      <button type="button">삭제</button>
+      <button type="button">수정</button>
     </li>
   );
 }

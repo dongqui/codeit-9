@@ -3,18 +3,18 @@ import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
 export default function App() {
-  const { todoList, setTodoList } = useState([]);
+  const [todos, setTodos] = useState([]);
 
-  const handleAddClick = (todo) => {
-    setTodoList([todo]);
+  const handleAddTodo = (addTodo) => {
+    setTodos([...todos, addTodo]);
   };
 
   return (
     <div>
-      <TodoInput onClick={handleAddClick} />
+      <TodoInput onAdd={handleAddTodo} />
       <ul>
-        {todoList.map((todo) => (
-          <TodoItem key={todo.id} title={todo.title} />
+        {todos.map((todo) => (
+          <TodoItem key={todo.id} text={todo.text} />
         ))}
       </ul>
     </div>
