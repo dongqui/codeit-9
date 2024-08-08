@@ -13,9 +13,9 @@ export default function App() {
     <div>
       <TodoInput onClick={handleAddClick} />
       <ul>
-        {todoList.map((todo) => {
-          <TodoItem key={todo.id} title={todo.title} />;
-        })}
+        {todoList.map((todo) => (
+          <TodoItem key={todo.id} title={todo.title} />
+        ))}
       </ul>
     </div>
   );
