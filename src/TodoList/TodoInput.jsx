@@ -1,10 +1,23 @@
-let id = 0;
+import { useState } from "react";
 
-export default function TodoInput() {
+export default function TodoInput({ addTodo }) {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (inputValue) {
+      addTodo(inputValue);
+      setInputValue("");
+    }
+  };
+
   return (
     <>
-      <input />
-      <button>입력</button>
+      <input type="text" value={inputValue} onChange={handleChange} />
+      <button onClick={handleSubmit}>입력</button>
     </>
   );
 }
