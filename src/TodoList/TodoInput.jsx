@@ -1,10 +1,16 @@
 let id = 0;
 
-export default function TodoInput() {
+export default function TodoInput({ onInputChange }) {
+ 
+  let inputValue = '';
+  const handleChange = (e) => {
+    onInputChange(e.target.value);
+  };
+
   return (
     <>
-      <input />
-      <button>입력</button>
+      <input onChange={inputValue = e.target.value} />
+      <button onClick={handleChange}>입력</button>
     </>
   );
 }
