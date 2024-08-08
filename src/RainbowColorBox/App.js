@@ -2,8 +2,8 @@ import ColorBox from "./ColorBox";
 
 import "./App.css";
 import { useState } from "react";
-import ResetButton from "./RainbowColorBox/ResetButton";
-import Rainbow from "./RainbowColorBox/Rainbow";
+import ResetButton from "./ResetButton";
+import Rainbow from "./Rainbow";
 
 function App() {
   const [color, setColor] = useState("");
