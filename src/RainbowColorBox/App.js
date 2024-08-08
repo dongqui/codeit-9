@@ -1,15 +1,37 @@
 import ColorBox from "./ColorBox";
-
 import "./App.css";
 import { useState } from "react";
-import ErrorMessage from "./ErrorMessage";
+import ResetButton from "./ResetButton";
 
 function App() {
+	const [state, setState] = useState({
+    color: "white",
+    error: ""
+  });
 
-	const [color,setColor] = useState('white');
+	const RAINBOW_COLORS = [
+		"red",
+		"orange",
+		"yellow",
+		"green",
+		"blue",
+		"navy",
+		"purple",
+	];
 
 	const onChange = (e) => {
-		setColor(e.target.value);
+		const newColor = e.target.value;
+		if (newColor === "") {
+			setState({ color: "white", error: "" });
+		} else if (RAINBOW_COLORS.includes(newColor)) {
+			setState({ color: newColor, error: "" });
+		} else {
+      setState((prevState) => ({ ...prevState, error: "무지개 색이 아닙니다" }));
+		}
+	};
+
+	const handleResetClick = () => {
+		setState({ color: "white", error: "" });
 	};
 
   return (
@@ -18,8 +40,9 @@ function App() {
       <div>
         <input onChange={onChange}/>
       </div>
-      <ColorBox color={color}/>
-			<ErrorMessage />
+      <ColorBox color={state.color}/>
+			<ResetButton onClick={handleResetClick} />
+      {state.error && <div className="error">{state.error}</div>}
     </div>
   );
 }
