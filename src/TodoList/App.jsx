@@ -17,8 +17,11 @@ export default function App() {
     <div>
       <TodoInput onSubmit={handleOnClick} />
       <ul>
-        <TodoItem handleDelete={handleDelete} />
-        {items.map(() => {})}
+        {items.map((item) => {
+          return (
+            <TodoItem id={item.id} item={item} handleDelete={handleDelete} />
+          );
+        })}
       </ul>
     </div>
   );

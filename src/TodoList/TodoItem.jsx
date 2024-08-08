@@ -1,7 +1,7 @@
-export default function TodoItem({ handleDelete }) {
+export default function TodoItem({ item, handleDelete }) {
   return (
     <li>
-      예시
+      {item.title}
       <button type="button" onClick={handleDelete}>
         삭제
       </button>
