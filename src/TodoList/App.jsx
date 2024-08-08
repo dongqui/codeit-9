@@ -1,22 +1,37 @@
+import { useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
-let id = 0;
-
 export default function App() {
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target)
-    id = id + 1;
+  const [toDoList, setToDoList] = useState([]);
 
-    return id;
-  }
+  const onSubmit = (id, value) => {
+    setToDoList((prevToDo) => [...prevToDo, { id: id++, value }]);
+  };
+
+  const onDeleteToDoList = (id) => {
+    setToDoList((prevList) => prevList.filter((item) => item.id !== id));
+  };
+
+  const onEditToDoList = (id, newValue) => {
+    setToDoList((prevList) =>
+      prevList.map((item) => (item.id === id ? { ...item, value: newValue } : item))
+    );
+  };
 
   return (
     <div>
-      <TodoInput />
+      <TodoInput onSubmit={onSubmit} />
       <ul>
-        <TodoItem />
+        {toDoList.map((toDo) => (
+          <TodoItem
+            key={toDo.id}
+            id={toDo.id}
+            toDo={toDo}
+            onDeleteToDoList={onDeleteToDoList}
+            onEditToDoList={onEditToDoList}
+          />
+        ))}
       </ul>
     </div>
   );
