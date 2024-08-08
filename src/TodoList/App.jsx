@@ -5,9 +5,10 @@ import TodoItem from "./TodoItem";
 export default function App() {
   const [items, setItems] = useState([]);
 
-  const handleOnClick = (item) => {
+  const handleSubmit = (item) => {
     setItems((prevItems) => [item, ...prevItems]);
   };
+
   const handleDelete = (id) => {
     const nextItems = items.filter((item) => item.id !== id);
     setItems([...nextItems]);
@@ -15,11 +16,11 @@ export default function App() {
 
   return (
     <div>
-      <TodoInput onSubmit={handleOnClick} />
+      <TodoInput onSubmit={handleSubmit} />
       <ul>
         {items.map((item) => {
           return (
-            <TodoItem id={item.id} item={item} handleDelete={handleDelete} />
+            <TodoItem key={item.id} item={item} handleDelete={handleDelete} />
           );
         })}
       </ul>
