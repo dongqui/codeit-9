@@ -1,9 +1,8 @@
-export default function TodoItem() {
-  return (
+export default function TodoItem({ list }) {
+  return list.map((item) => {
     <li>
-      예시
       <button type="button">삭제</button>
       <button type="button">수정</button>
-    </li>
-  );
+    </li>;
+  });
 }
