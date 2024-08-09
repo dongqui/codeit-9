@@ -1,7 +1,7 @@
-export default function TodoItem() {
+export default function TodoItem({ value }) {
   return (
     <li>
-      예시
+      {value}
       <button type="button">삭제</button>
       <button type="button">수정</button>
     </li>
