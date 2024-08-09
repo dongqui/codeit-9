@@ -3,13 +3,19 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 
 export default function App() {
-  const [todoList, setTodoList] = useState('');
+  const [todoList, setTodoList] = useState([]);
+
+  const addTodo = todo => {
+    setTodoList(prevTodo => [...prevTodo, todo]);
+  };
 
   return (
     <div>
-      <TodoInput />
+      <TodoInput addTodoClick={addTodo} />
       <ul>
-        <TodoItem todoList={todoList} />
+        {todoList.map(todo => (
+          <TodoItem key={todo.id} todo={todo.title} />
+        ))}
       </ul>
     </div>
   );

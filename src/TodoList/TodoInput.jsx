@@ -2,19 +2,26 @@ import { useState } from 'react';
 
 let id = 0;
 
-export default function TodoInput() {
-  const [titile, setTitle] = useState('');
+export default function TodoInput({ addTodoClick }) {
+  const [title, setTitle] = useState();
+
   const handleChange = e => {
     setTitle(e.target.value);
   };
 
   const handleClick = () => {
-    setTitle(id++);
+    if (title) {
+      addTodoClick({
+        id: id++,
+        title,
+      });
+      setTitle('');
+    }
   };
 
   return (
     <>
-      <input value={titile} onChange={handleChange} />
+      <input value={title} onChange={handleChange} />
       <button onClick={handleClick}>입력</button>
     </>
   );
