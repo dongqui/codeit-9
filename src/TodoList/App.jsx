@@ -3,19 +3,19 @@ import TodoItem from "./TodoItem";
 import { useState } from "react";
 
 export default function App() {
-  const [list, setList] = useState("");
-  const [id, setId] = useState("");
+  const [list, setList] = useState([]);
 
-  const handleInput = (inputVal, inputId) => {
-    setList(inputVal);
-    setId(inputId);
+  const handleInput = (inputVal) => {
+    setList([...list, inputVal]);
   };
 
   return (
     <div>
       <TodoInput onClick={handleInput} />
       <ul>
-        <TodoItem list={list} />
+        {list.map((item) => (
+          <TodoItem item={item} />
+        ))}
       </ul>
     </div>
   );
