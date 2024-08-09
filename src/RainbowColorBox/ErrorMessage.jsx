@@ -15,7 +15,11 @@ const style = {
 };
 
 const ErrorMessage = ({ color }) => {
-  return <div color={RAINBOW_COLORS} ? style={style} : style='null'>무지개 색이 아닙니다</div>;
+  return (
+    <div style={RAINBOW_COLORS.includes(color) ? (style = { style }) : null}>
+      무지개 색이 아닙니다
+    </div>
+  );
 };
 
 export default ErrorMessage;
