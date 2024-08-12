@@ -7,15 +7,15 @@ export default function TodoInput({ addTodo }) {
 
   const handleInputChange = (e) => setInputValue(e.target.value);
 
-  const handleAddToDo = () => {
-    addTodo(inputValue);
+  const handleOnClick = () => {
+    addTodo({ id: id++, inputValue: inputValue });
     setInputValue("");
   };
 
   return (
     <>
       <input value={inputValue} onChange={handleInputChange} />
-      <button onClick={handleAddToDo}>입력</button>
+      <button onClick={handleOnClick}>입력</button>
     </>
   );
 }

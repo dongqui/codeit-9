@@ -6,14 +6,21 @@ export default function App() {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
-    setTodos([...todos], { id: todos.length, text: todo });
+    setTodos((prevTodos) => [todo, ...prevTodos]);
+  };
+
+  const deleteTodo = (id) => {
+    const nextTodos = todos.filter((todo) => todo.id !== id);
+    setTodos([...nextTodos]);
   };
 
   return (
     <div>
       <TodoInput addTodo={addTodo} />
       <ul>
-        <TodoItem />
+        {todos.map((todo) => {
+          return <TodoItem key={todo.id} text={todo} onDelete={deleteTodo} />;
+        })}
       </ul>
     </div>
   );
