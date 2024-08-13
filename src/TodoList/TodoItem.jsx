@@ -1,31 +1,51 @@
-export default function TodoItem({ todo, onDelete, onUpdate }) {
-  const [editTodoId, setEditTodoId] = useState('');
-  const [editTodoContent, setEditTodoContent] = useState('');
+import { useState } from 'react';
 
-  const onClickDeleteButton = () => {
+export default function TodoItem({ todo, onUpdate, onDelete }) {
+  const [edit, setEdit] = useState(false);
+  const [newTodo, setNewTodo] = useState(todo.title);
+
+  const onClickDelete = () => {
     onDelete(todo.id);
   };
 
-  const onClickUpdateButton = (id, content) => {
-    editTodoId(id);
-    editTodoContent(content);
+  const onClickUpdate = () => {
+    onUpdate(todo.id, newTodo);
+    setEdit(false);
+  };
+
+  const onChangeInput = e => {
+    setNewTodo(e.target.value);
+    console.log(newTodo);
+  };
+
+  // 수정 클릭시 edit가 true면 확인,취소 / false면 삭제,수정
+  const onClickEdit = () => {
+    setEdit(prev => !prev);
   };
 
   return (
     <li>
-      {todo.title}
-      <button type="button" onClick={onClickDeleteButton}>
-        삭제
-      </button>
-      
-      { editTodoId === todo.id ? (
-      <button type="button" onClick={onClickUpdateButton(editTodoId, editTodoContent)}>
-        수정
-      </button>
-      ) : 
-        <button>확인</button>
-        <button>취소</button>
-      }
+      {edit ? (
+        <>
+          <input type="text" value={newTodo} onChange={onChangeInput} />
+          <button type="button" onClick={onClickUpdate}>
+            확인
+          </button>
+          <button type="button" onClick={onClickEdit}>
+            취소
+          </button>
+        </>
+      ) : (
+        <>
+          {todo.title}
+          <button type="button" onClick={onClickDelete}>
+            삭제
+          </button>
+          <button type="button" onClick={onClickEdit}>
+            수정
+          </button>
+        </>
+      )}
     </li>
   );
 }
