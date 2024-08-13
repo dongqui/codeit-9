@@ -3,21 +3,32 @@ import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
 export default function App() {
+  const [todoList, setTodoList] = useState([]);
 
-  const [inputValue, setInputValue] = useState('');
-  const [itemList, setItemList] = useState(TodoItem);
-
-  const handleInputChange = (value) => {
-    setInputValue(value);
+  const handleAddClick = (todo) => {
+    setTodoList([todo, ...todoList]);
   };
 
-
+  const handleListRemove = (todo) => {
+    let indexCurrentTodo = todoList.indexOf(todo);
+    const newList = [
+      ...todoList.slice(0, indexCurrentTodo),
+      ...todoList.slice(indexCurrentTodo + 1),
+    ];
+    setTodoList(newList);
+  };
 
   return (
     <div>
-      <TodoInput onInputChange={handleInputChange} />
+      <TodoInput onAddClick={handleAddClick} />
       <ul>
-        <TodoItem />
+        {todoList.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            title={todo.text}
+            onDelete={handleListRemove}
+          />
+        ))}
       </ul>
     </div>
   );
