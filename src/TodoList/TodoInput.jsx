@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 let id = 0;
 
-export default function TodoInput({ addTodoClick }) {
+export default function TodoInput({ addTodo }) {
   const [title, setTitle] = useState();
 
   const handleChange = e => {
@@ -11,7 +11,7 @@ export default function TodoInput({ addTodoClick }) {
 
   const handleClick = () => {
     if (title) {
-      addTodoClick({
+      addTodo({
         id: id++,
         title,
       });

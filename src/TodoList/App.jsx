@@ -6,15 +6,20 @@ export default function App() {
   const [todoList, setTodoList] = useState([]);
 
   const addTodo = todo => {
-    setTodoList(prevTodo => [...prevTodo, todo]);
+    setTodoList([...todoList, todo]);
+  };
+
+  const inputDelete = id => {
+    setTodoList(todoList.filter(todo => todo.id !== id));
+    setTodoList([...todoList]);
   };
 
   return (
     <div>
-      <TodoInput addTodoClick={addTodo} />
+      <TodoInput addTodo={addTodo} />
       <ul>
         {todoList.map(todo => (
-          <TodoItem key={todo.id} todo={todo.title} />
+          <TodoItem key={todo.id} todo={todo.title} onDelete={inputDelete} />
         ))}
       </ul>
     </div>
