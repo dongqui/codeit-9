@@ -1,8 +1,8 @@
-export default function TodoItem({ id, key, text, handleDeleteTodo }) {
+export default function TodoItem({ item, text, handleDeleteTodo }) {
   return (
-    <li id={id} key={key}>
+    <li>
       {text}
-      <button type="button" onClick={handleDeleteTodo}>
+      <button type="button" onClick={() => handleDeleteTodo(item.id)}>
         삭제
       </button>
       <button type="button">수정</button>

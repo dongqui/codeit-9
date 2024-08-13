@@ -20,10 +20,10 @@ export default function App() {
       <ul>
         {todos.map((todo) => (
           <TodoItem
-            id={todo.id}
             key={todo.id}
+            item={todo}
             text={todo.text}
-            onClick={handleDeleteTodo}
+            handleDeleteTodo={handleDeleteTodo}
           />
         ))}
       </ul>
