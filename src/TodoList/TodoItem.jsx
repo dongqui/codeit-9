@@ -1,8 +1,12 @@
-export default function TodoItem({ value }) {
+import { useState } from "react";
+
+export default function TodoItem({ value, key, onDelete }) {
   return (
-    <li>
+    <li key={key}>
       {value}
-      <button type="button">삭제</button>
+      <button type="button" onClick={() => onDelete}>
+        삭제
+      </button>
       <button type="button">수정</button>
     </li>
   );
