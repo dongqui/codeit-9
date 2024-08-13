@@ -7,18 +7,24 @@ let id = 0;
 
 //id를 사용해서 하나씩 id에 추가되는 형식으로 작성
 
-export default function TodoInput() {
-	const [todo, setTodo] = useState("");
+export default function TodoInput({ onAdd }) {
+	const [inputValue, setInputValue] = useState('');
 
-	const addTodo = () => {
-		setTodo([...todo, {id: id++, content: todo}]);
-		setTodo("");
-	}
+	const handleInputChange = (e) => {
+		setInputValue(e.target.value);
+	};
+
+	const handleInputClick = () => {
+		if (inputValue) {
+		onAdd({ id: id++, text: inputValue });
+		setInputValue('');
+		}
+	};
 
   return (
     <>
-      <input value={todo} />
-      <button>입력</button>
+      <input value={inputValue} onChange={handleInputChange}/>
+      <button onClick={handleInputClick}>입력</button>
     </>
   );
 }
