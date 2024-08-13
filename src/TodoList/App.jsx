@@ -9,8 +9,12 @@ export default function App() {
     setTodoList([...todoList, todo]);
   };
 
-  const inputDelete = id => {
+  const onDelete = id => {
     setTodoList(todoList.filter(todo => todo.id !== id));
+  };
+
+  const onUpdate = (id, newTodo) => {
+    setTodoList(todoList.map(todo => (todo.id === id ? { ...todo, title: newTodo } : todo)));
   };
 
   return (
@@ -18,8 +22,7 @@ export default function App() {
       <TodoInput addTodo={addTodo} />
       <ul>
         {todoList.map(todo => (
-          // {todo} prop 넘겨줄 때 주의
-          <TodoItem key={todo.id} todo={todo} onUpdate={inputUpdate} onDelete={inputDelete} />
+          <TodoItem key={todo.id} todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
         ))}
       </ul>
     </div>
