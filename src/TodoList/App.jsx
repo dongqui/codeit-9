@@ -7,9 +7,13 @@ export default function App() {
 
   const handleTodoSubmit = (newValue) => {
     const updatedTodos = [...todos, newValue];
-    console.log(updatedTodos);
+
     // setTodos((prev) => [...prev, newValue]);
     setTodos(updatedTodos);
+  };
+
+  const onDelete = (id) => {
+    setTodos((prevTodos) => prevTodos.filter((item) => item.id !== id));
   };
 
   return (
@@ -17,7 +21,7 @@ export default function App() {
       <TodoInput onSubmit={handleTodoSubmit} />
       <ul>
         {todos?.map((todo) => (
-          <TodoItem key={todo.id} title={todo.title} />
+          <TodoItem id={todo.id} title={todo.title} onDelete={onDelete} />
         ))}
       </ul>
     </div>
