@@ -8,13 +8,13 @@ export default function TodoInput({ onSubmit }) {
   const onChangeInput = (e) => {
     const userInput = e.target.value;
     setToDo(userInput);
-  }
+  };
 
   const onSubmitForm = (e) => {
     e.preventDefault();
     id = id + 1;
     onSubmit(id, toDo);
-  }
+  };
 
   return (
     <>
