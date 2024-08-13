@@ -1,9 +1,16 @@
-export default function TodoItem({ value }) {
+export default function TodoItem({ value, handleDelete }) {
+  const handleDeleteClick = () => {
+    handleDelete(value.id);
+  };
+
   return (
     <li>
       {value}
-      <button type="button">삭제</button>
+      <button type="button" onClick={handleDeleteClick}>
+        삭제
+      </button>
       <button type="button">수정</button>
     </li>
   );
 }
+asd;
