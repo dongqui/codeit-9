@@ -10,8 +10,16 @@ export default function App() {
   };
 
   const handleDelete = (id) => {
-    const nextodoList = todoList.filter((item) => item.id !== id);
-    setTodoList([...nextodoList]);
+    const nextTodoList = todoList.filter((item) => item.id !== id);
+    setTodoList(nextTodoList);
+  };
+
+  const handleEdit = (id, newValue) => {
+    setTodoList((prevTodoList) => {
+      prevTodoList.map((item) =>
+        item.id === id ? { ...item, value: newValue } : item
+      );
+    });
   };
 
   return (
@@ -19,7 +27,12 @@ export default function App() {
       <TodoInput onSubmit={handleOnClick} />
       <ul>
         {todoList.map((todo) => (
-          <TodoItem value={todo.value} handleDelete />
+          <TodoItem
+            key={todo.id}
+            value={todo.value}
+            id={todo.id}
+            onDelete={handleDelete}
+          />
         ))}
       </ul>
     </div>
