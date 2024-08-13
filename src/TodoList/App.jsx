@@ -4,6 +4,7 @@ import TodoItem from "./TodoItem";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
   const addTodo = (todo) => {
     setTodos((prevTodos) => [todo, ...prevTodos]);
@@ -14,12 +15,31 @@ export default function App() {
     setTodos([...nextTodos]);
   };
 
+  const inputChange = (value) => {
+    setInputValue(value);
+  };
+
+  const editTodo = (id, inputValue) => {
+    const editedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, inputValue: inputValue } : todo
+    );
+    setTodos(editedTodos);
+  };
+
   return (
     <div>
-      <TodoInput addTodo={addTodo} />
+      <TodoInput addTodo={addTodo} inputChange={inputChange} />
       <ul>
         {todos.map((todo) => {
-          return <TodoItem key={todo.id} text={todo} onDelete={deleteTodo} />;
+          return (
+            <TodoItem
+              key={todo.id}
+              text={todo}
+              onDelete={deleteTodo}
+              onEdit={editTodo}
+              editedTodos={inputValue}
+            />
+          );
         })}
       </ul>
     </div>

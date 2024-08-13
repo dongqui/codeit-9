@@ -2,10 +2,13 @@ import { useState } from "react";
 
 let id = 0;
 
-export default function TodoInput({ addTodo }) {
+export default function TodoInput({ addTodo, inputChange }) {
   const [inputValue, setInputValue] = useState("");
 
-  const handleInputChange = (e) => setInputValue(e.target.value);
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    inputChange(inputValue);
+  };
 
   const handleOnClick = () => {
     addTodo({ id: id++, inputValue: inputValue });
