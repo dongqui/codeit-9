@@ -19,7 +19,7 @@ export default function App() {
       <TodoInput onClick={handleInput} />
       <ul>
         {list.map((item) => (
-          <TodoItem item={item} onClick={handleDelete} />
+          <TodoItem key={item.id} item={item} onClick={handleDelete} />
         ))}
       </ul>
     </div>

@@ -14,7 +14,6 @@ export default function TodoInput({ onClick }) {
       title: value,
       id: id++,
     });
-    console.log(value);
   };
 
   return (
