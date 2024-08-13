@@ -2,13 +2,14 @@ import { useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
+let nextId = 1;
+
 export default function App() {
   const [todos, setTodos] = useState([]);
-  const [nextId, setNextId] = useState(1);
 
   const addTodo = (text) => {
     setTodos([...todos, { id: nextId, text }]);
-    setNextId(nextId + 1);
+    nextId++;
   };
 
   const deleteTodo = (id) => {
