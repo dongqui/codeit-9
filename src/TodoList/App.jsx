@@ -18,7 +18,8 @@ export default function App() {
       <TodoInput addTodo={addTodo} />
       <ul>
         {todoList.map(todo => (
-          <TodoItem key={todo.id} todo={todo.title} onDelete={inputDelete} />
+          // {todo} prop 넘겨줄 때 주의
+          <TodoItem key={todo.id} todo={todo} onUpdate={inputUpdate} onDelete={inputDelete} />
         ))}
       </ul>
     </div>
