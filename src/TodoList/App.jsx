@@ -6,14 +6,29 @@ export default function App() {
   const [todos, setTodos] = useState([]);
 
   const handleTodoSubmit = (newValue) => {
-    const updatedTodos = [...todos, newValue];
-
-    // setTodos((prev) => [...prev, newValue]);
-    setTodos(updatedTodos);
+    setTodos((prevTodos) => [...prevTodos, newValue]);
   };
 
   const onDelete = (id) => {
     setTodos((prevTodos) => prevTodos.filter((item) => item.id !== id));
+  };
+
+  const onUpdate = (id, value) => {
+    console.log(value);
+    setTodos((prev) => {
+      const splitIdx = prev.findIndex((item) => item.id === id);
+      const sliced = prev.slice(0, splitIdx);
+      const sliced2 = prev.slice(splitIdx + 1);
+
+      return [
+        ...sliced,
+        {
+          id,
+          title: value,
+        },
+        ...sliced2,
+      ];
+    });
   };
 
   return (
@@ -21,7 +36,13 @@ export default function App() {
       <TodoInput onSubmit={handleTodoSubmit} />
       <ul>
         {todos?.map((todo) => (
-          <TodoItem id={todo.id} title={todo.title} onDelete={onDelete} />
+          <TodoItem
+            key={todo.id}
+            id={todo.id}
+            title={todo.title}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />
         ))}
       </ul>
     </div>
