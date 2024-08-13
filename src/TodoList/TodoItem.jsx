@@ -1,18 +1,47 @@
-export default function TodoItem({ item, onClick }) {
+import { useState } from "react";
+
+export default function TodoItem({ item, clickDelete, clickModify }) {
+  const [editing, setEditing] = useState(false);
+  const [modifyValue, setModifyValue] = useState(item.title);
+
   const handleDelete = () => {
-    onClick(item.id);
+    clickDelete(item.id);
   };
 
-  const handleModify = (e) => {
-    const inputElement = document.createElement("input");
-    const okButton = document.createElement("button");
-    const cancelButton = document.createElement("button");
-    okButton.innerHtml = "확인";
-    cancelButton.innerHtml = "취소";
-    document.body.appendChild(inputElement);
-    document.body.appendChild(okButton);
-    document.body.appendChild(cancelButton);
+  const handleModify = () => {
+    setEditing(true);
   };
+
+  const handleModifyInput = (e) => {
+    setModifyValue(e.target.value);
+  };
+
+  const handleOk = () => {
+    clickModify({
+      title: modifyValue,
+      id: item.id,
+    });
+    setEditing(false);
+  };
+
+  const handleCancel = () => {
+    setEditing(false);
+  };
+
+  if (editing) {
+    return (
+      <li>
+        <input value={modifyValue} onChange={handleModifyInput} />
+        <button type="button" onClick={handleOk}>
+          확인
+        </button>
+        <button type="button" onClick={handleCancel}>
+          취소
+        </button>
+      </li>
+    );
+  }
+
   return (
     <li>
       {item.title}

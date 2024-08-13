@@ -9,6 +9,13 @@ export default function App() {
     setList([...list, inputVal]);
   };
 
+  const handleModifyInput = (targetValue) => {
+    list.forEach((item) => {
+      item.id === targetValue.id && (item.title = targetValue.title);
+    });
+    setList(list);
+  };
+
   const handleDelete = (id) => {
     const newList = list.filter((item) => item.id !== id);
     setList(newList);
@@ -19,7 +26,12 @@ export default function App() {
       <TodoInput onClick={handleInput} />
       <ul>
         {list.map((item) => (
-          <TodoItem key={item.id} item={item} onClick={handleDelete} />
+          <TodoItem
+            key={item.id}
+            item={item}
+            clickDelete={handleDelete}
+            clickModify={handleModifyInput}
+          />
         ))}
       </ul>
     </div>
