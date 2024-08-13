@@ -11,7 +11,6 @@ export default function App() {
 
   const inputDelete = id => {
     setTodoList(todoList.filter(todo => todo.id !== id));
-    setTodoList([...todoList]);
   };
 
   return (
