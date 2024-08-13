@@ -20,7 +20,7 @@ export default function App() {
         setItems((prevItems) => [
             ...prevItems.slice(0, splitIdx),
             product,
-            ...prevItems(splitIdx + 1),
+            ...prevItems.slice(splitIdx + 1),
         ]);
         setEditId(null);
     };
