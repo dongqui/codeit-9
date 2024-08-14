@@ -29,13 +29,20 @@ const getTodos = http.get("/todos", () =>
 );
 
 const deleteTodo = http.delete("/todos/:id", ({ params }) => {
-  data = data.filter((d) => d.id !== Number(params.id));
+  const index = data.findIndex((todo) => todo.id === Number(params.id));
+  if (index < 0) {
+    return HttpResponse.json({ error: "유효하지 않은 id" }, { status: 400 });
+  }
+  data.splice(index, 1);
   return HttpResponse.json({ id: Number(params.id) }, { status: 202 });
 });
 
 const putTodo = http.patch("/todos/:id", async ({ params, request }) => {
   const todo = data.find((d) => d.id === Number(params.id));
   const newTodo = await request.json();
+  if (!todo || newTodo.title === undefined) {
+    return HttpResponse.json({ error: "유효하지 않은 요청" }, { status: 400 });
+  }
   todo.title = newTodo.title;
   return HttpResponse.json({ ...todo }, { status: 201 });
 });
@@ -43,6 +50,9 @@ const putTodo = http.patch("/todos/:id", async ({ params, request }) => {
 let id = 10;
 const postTodo = http.post("/todos", async ({ request }) => {
   const newTodo = await request.json();
+  if (newTodo.title === undefined) {
+    return HttpResponse.json({ error: "유효하지 않은 요청" }, { status: 400 });
+  }
   const todo = {
     id: id++,
     title: newTodo.title,
