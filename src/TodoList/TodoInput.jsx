@@ -3,7 +3,7 @@
 // id += 1;
 import { useState } from 'react';
 
-let id = 0;
+let id = 5;
 
 export default function TodoInput({ onAdd }) {
   const [inputValue, setInputValue] = useState('');
@@ -12,7 +12,7 @@ export default function TodoInput({ onAdd }) {
 
   const handleInputSubmit = () => {
     if (inputValue) {
-      onAdd({ id: ++id, text: inputValue });
+      onAdd({ id: ++id, title: inputValue });
       setInputValue('');
     }
   };
