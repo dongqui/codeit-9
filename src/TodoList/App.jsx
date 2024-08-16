@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
+import handlers from "./TodoMockServer/handlers";
 
 export default function App() {
     const [items, setItems] = useState([]);
@@ -24,6 +25,17 @@ export default function App() {
         ]);
         setEditId(null);
     };
+
+    useEffect(() => {
+        console.log(handlers);
+        const getData = async () => {
+            const getTodos = handlers[0];
+            const result = await getTodos();
+            return result;
+        };
+        const data = getData();
+        setItems(data);
+    }, []);
 
     return (
         <div>
