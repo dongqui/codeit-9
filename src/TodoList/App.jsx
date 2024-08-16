@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
+import { getTodos, updateTodos } from "./api";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -13,8 +14,7 @@ export default function App() {
     setTodos((prevTodos) => prevTodos.filter((item) => item.id !== id));
   };
 
-  const onUpdate = (id, value) => {
-    console.log(value);
+  const onUpdate = ({ id, title }) => {
     setTodos((prev) => {
       const splitIdx = prev.findIndex((item) => item.id === id);
       const sliced = prev.slice(0, splitIdx);
@@ -24,12 +24,32 @@ export default function App() {
         ...sliced,
         {
           id,
-          title: value,
+          title,
         },
         ...sliced2,
       ];
     });
   };
+
+  const handleFetch = async () => {
+    const result = await getTodos();
+    setTodos(result);
+  };
+
+  const handleUpdate = async (id, title) => {
+    try {
+      const updatedTodo = await updateTodos(id, title);
+      onUpdate(updatedTodo);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handlePost = async (title) => {};
+
+  useEffect(() => {
+    handleFetch();
+  }, []);
 
   return (
     <div>
@@ -40,7 +60,7 @@ export default function App() {
             key={todo.id}
             id={todo.id}
             title={todo.title}
-            onUpdate={onUpdate}
+            onUpdate={handleUpdate}
             onDelete={onDelete}
           />
         ))}
