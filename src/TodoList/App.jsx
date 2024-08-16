@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 export default function App() {
 	const [todos, setTodos] = useState([]);
+	const [currentTodo, setCurrentTodo] = useState(null);
 
 	const handleAddTodo = (newTodo) => {
 		setTodos([...todos, newTodo]);
@@ -14,12 +15,17 @@ export default function App() {
 		setTodos(nextTodos);
 	};
 
+	const handleEditClick = (id) => {
+		const todoEdit = todos.find((todo) => todo.id === id);
+		setCurrentTodo(todoEdit);
+	}
+
   return (
     <div>
       <TodoInput onAdd={handleAddTodo} />
       <ul>
 				{todos.map((todo) => (
-					<TodoItem key={todo.id} item={todo} onDelete={handleDelete} />
+					<TodoItem key={todo.id} item={todo} onDelete={handleDelete} onUpdateSuccess={handleEditClick}/>
 				))}  
       </ul>
     </div>
