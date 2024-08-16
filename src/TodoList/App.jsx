@@ -5,6 +5,7 @@ import { useState } from 'react';
 export default function App() {
 	const [todos, setTodos] = useState([]);
 	const [currentTodo, setCurrentTodo] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleAddTodo = (newTodo) => {
 		setTodos([...todos, newTodo]);
@@ -20,9 +21,14 @@ export default function App() {
 		setCurrentTodo(todoEdit);
 	}
 
+	const handleModify = (modifiedTodo) => {
+		const modifyedTodos = todos.map((todo) => (todo.id === modifiedTodo.id ? modifiedTodo : todo));
+		setTodos(modifyedTodos);
+	}
+
   return (
     <div>
-      <TodoInput onAdd={handleAddTodo} />
+      <TodoInput onAdd={handleAddTodo} currentTodo={currentTodo} onEdit={handleModify} />
       <ul>
 				{todos.map((todo) => (
 					<TodoItem key={todo.id} item={todo} onDelete={handleDelete} onEdit={handleEditClick}/>
