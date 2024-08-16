@@ -1,15 +1,10 @@
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 import { useEffect, useState } from "react";
-import getTodos from "./TodoMockServer/handlers";
+import { getTodoList } from "./api";
 
 export default function App() {
   const [list, setList] = useState([]);
-
-  const todoList = async () => {
-    const result = await getTodos();
-    setList(result);
-  };
 
   const handleInput = (inputVal) => {
     setList([...list, inputVal]);
@@ -29,6 +24,11 @@ export default function App() {
   };
 
   useEffect(() => {
+    const todoList = async () => {
+      const todo = await getTodoList();
+      setList(todo);
+    };
+
     todoList();
   }, []);
 
