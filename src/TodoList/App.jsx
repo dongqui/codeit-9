@@ -7,9 +7,9 @@ export default function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('/todos');
-      const data = await response.json();
-      setTodoList(data);
+      fetch('/todos')
+        .then(response => response.json())
+        .then(data => setTodoList(data));
     } catch (error) {
       console.error('데이터를 불러오는데 실패하였습니다.');
     }
