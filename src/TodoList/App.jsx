@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-  const [inputValue, setInputValue] = useState("");
 
   const addTodo = (todo) => {
     setTodos((prevTodos) => [todo, ...prevTodos]);
@@ -15,10 +14,6 @@ export default function App() {
     setTodos([...nextTodos]);
   };
 
-  const inputChange = (value) => {
-    setInputValue(value);
-  };
-
   const editTodo = (id, inputValue) => {
     const editedTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, inputValue: inputValue } : todo
@@ -26,9 +21,22 @@ export default function App() {
     setTodos(editedTodos);
   };
 
+  useEffect(() => {
+    fetch("/todos")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("데이터를 가져오는 데 실패했습니다.");
+        }
+        return response.json();
+      })
+      .then((response) => {
+        setTodos([...response]);
+      });
+  });
+
   return (
     <div>
-      <TodoInput addTodo={addTodo} inputChange={inputChange} />
+      <TodoInput addTodo={addTodo} />
       <ul>
         {todos.map((todo) => {
           return (
@@ -37,7 +45,6 @@ export default function App() {
               text={todo}
               onDelete={deleteTodo}
               onEdit={editTodo}
-              editedTodos={inputValue}
             />
           );
         })}
