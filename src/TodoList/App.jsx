@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <div>
-      <TodoInput onAdd={handleAddTodo} currentTodo={currentTodo} onEdit={handleModify} />
+      <TodoInput onAdd={handleAddTodo} />
       <ul>
         {todos.map((todo) => (
           <TodoItem key={todo.id} item={todo} onDelete={handleDelete} onEdit={handleEditClick} isEditing={currentTodo && currentTodo.id === todo.id} onModify={(text) => handleModify({ ...todo, text })} />
