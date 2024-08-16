@@ -14,6 +14,13 @@ export default function App() {
     setTodos(nextTodos);
   };
 
+  const handleUpdateTodo = (id, text) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, text: text } : todo
+    );
+    setTodos(updatedTodos);
+  };
+
   return (
     <div>
       <TodoInput onAdd={handleAddTodo} />
@@ -24,6 +31,7 @@ export default function App() {
             item={todo}
             text={todo.text}
             handleDeleteTodo={handleDeleteTodo}
+            handleUpdateTOdo={handleUpdateTodo}
           />
         ))}
       </ul>
