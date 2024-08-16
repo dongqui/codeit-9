@@ -1,20 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
+import { getTodoList } from './api';
 
 export default function App() {
   const [todoList, setTodoList] = useState([]);
 
-  const getTodo = async () => {
-    try {
-      fetch('/todos')
-        .then(response => response.json())
-        .then(data => setTodoList(data));
-    } catch (error) {
-      console.error('데이터를 불러오는데 실패하였습니다.');
-    }
-  };
-  getTodo();
+  useEffect(() => {
+    const fetchTodoList = async () => {
+      const data = await getTodoList();
+      setTodoList(data);
+    };
+
+    fetchTodoList();
+  }, []);
 
   const addTodo = todo => {
     setTodoList([...todoList, todo]);
