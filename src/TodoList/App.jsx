@@ -27,11 +27,10 @@ export default function App() {
     };
 
     useEffect(() => {
-        console.log(handlers);
         const getData = async () => {
-            const getTodos = handlers[0];
-            const result = await getTodos();
-            return result;
+            const result = await fetch(`/todos`);
+            const body = await result.json();
+            return body;
         };
         const data = getData();
         setItems(data);
