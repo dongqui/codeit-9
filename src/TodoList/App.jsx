@@ -1,9 +1,11 @@
 import { useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
+import worker from "./TodoMockServer/browser.js";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
+  setTodos(worker.listHandlers("/todos"));
 
   const handleAddTodo = (addTodo) => {
     setTodos([...todos, addTodo]);
@@ -31,7 +33,7 @@ export default function App() {
             item={todo}
             text={todo.text}
             handleDeleteTodo={handleDeleteTodo}
-            handleUpdateTOdo={handleUpdateTodo}
+            handleUpdateTodo={handleUpdateTodo}
           />
         ))}
       </ul>
