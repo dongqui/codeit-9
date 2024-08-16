@@ -28,12 +28,11 @@ export default function App() {
 
     useEffect(() => {
         const getData = async () => {
-            const result = await fetch(`/todos`);
-            const body = await result.json();
-            return body;
+            const response = await fetch(`/todos`);
+            const body = await response.json();
+            setItems(body);
         };
-        const data = getData();
-        setItems(data);
+        getData();
     }, []);
 
     return (
