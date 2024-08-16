@@ -5,7 +5,7 @@ import worker from "./TodoMockServer/browser.js";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-  setTodos(worker.listHandlers("/todos"));
+  setTodos(worker.listHandlers("http://localhost:3000/todos"));
 
   const handleAddTodo = (addTodo) => {
     setTodos([...todos, addTodo]);
