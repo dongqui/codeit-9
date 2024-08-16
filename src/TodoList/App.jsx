@@ -5,7 +5,7 @@ import TodoItem from './TodoItem';
 export default function App() {
   const [todoList, setTodoList] = useState([]);
 
-  const fetchData = async () => {
+  const getTodo = async () => {
     try {
       fetch('/todos')
         .then(response => response.json())
@@ -14,7 +14,7 @@ export default function App() {
       console.error('데이터를 불러오는데 실패하였습니다.');
     }
   };
-  fetchData();
+  getTodo();
 
   const addTodo = todo => {
     setTodoList([...todoList, todo]);
