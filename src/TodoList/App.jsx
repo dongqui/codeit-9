@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
-import { getTodoList } from '../api.js';
 
 export default function App() {
   const [todoList, setTodoList] = useState([]);
