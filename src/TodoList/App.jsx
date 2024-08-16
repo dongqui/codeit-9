@@ -1,11 +1,11 @@
 import { useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import worker from "./TodoMockServer/browser.js";
+import { getTodos } from "./api";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-  setTodos(worker.listHandlers("http://localhost:3000/todos"));
+  setTodos(getTodos);
 
   const handleAddTodo = (addTodo) => {
     setTodos([...todos, addTodo]);
