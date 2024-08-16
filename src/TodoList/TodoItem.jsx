@@ -13,7 +13,7 @@ export default function TodoItem({ value, handleDelete }) {
     setNewValue(newInput);
   };
 
-  const handleEditClick = (e) => {?????????};
+  // const handleEditClick = (e) => {?????????};
 
   return (
     <li>
@@ -21,7 +21,7 @@ export default function TodoItem({ value, handleDelete }) {
       <button type="button" onClick={handleDeleteClick}>
         삭제
       </button>
-      <button type="button" onClick={}>수정</button>
+      <button type="button">수정</button>
     </li>
   );
 }
