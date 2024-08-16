@@ -25,7 +25,7 @@ export default function App() {
       <TodoInput onAdd={handleAddTodo} />
       <ul>
 				{todos.map((todo) => (
-					<TodoItem key={todo.id} item={todo} onDelete={handleDelete} onUpdateSuccess={handleEditClick}/>
+					<TodoItem key={todo.id} item={todo} onDelete={handleDelete} onEdit={handleEditClick}/>
 				))}  
       </ul>
     </div>
