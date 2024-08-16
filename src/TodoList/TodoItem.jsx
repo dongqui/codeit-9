@@ -1,11 +1,17 @@
-export default function TodoItem({ id, title, onDelete }) {
+export default function TodoItem({ todo, onDelete, setEditId }) {
+  const onEdit = () => {
+    setEditId(todo.id);
+  };
+
   return (
-    <li key={id}>
-      {title}
-      <button type="button" onClick={onDelete}>
+    <li>
+      {todo.text}
+      <button type="button" onClick={() => onDelete(todo)}>
         삭제
       </button>
-      <button type="button">수정</button>
+      <button type="button" onClick={onEdit}>
+        수정
+      </button>
     </li>
   );
 }

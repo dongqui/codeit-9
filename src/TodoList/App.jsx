@@ -4,6 +4,7 @@ import TodoItem from "./TodoItem";
 
 export default function App() {
   const [todoList, setTodoList] = useState([]);
+  const [editId, setEditId] = useState(0);
 
   const handleAddClick = (todo) => {
     setTodoList([todo, ...todoList]);
@@ -22,13 +23,16 @@ export default function App() {
     <div>
       <TodoInput onAddClick={handleAddClick} />
       <ul>
-        {todoList.map((todo) => (
+        {todoList.map((todo) => {
+          todo.id === editId && <TodoInput initialTodo={todo} />;
           <TodoItem
+            todo={todo}
             key={todo.id}
             title={todo.text}
             onDelete={handleListRemove}
-          />
-        ))}
+            setEditId={setEditId}
+          />;
+        })}
       </ul>
     </div>
   );
