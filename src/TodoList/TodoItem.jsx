@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export default function TodoItem({ value, id, onDelete, onUpdate }) {
+export default function TodoItem({ title, id, onDelete, onUpdate }) {
   const [editing, setEditing] = useState(false);
-  const [editValue, setEditValue] = useState(value);
+  const [editTitle, setEditTitle] = useState(title);
 
   const handleSave = () => {
-    onUpdate(id, editValue);
+    onUpdate(id, editTitle);
     setEditing(false);
   };
 
@@ -15,8 +15,8 @@ export default function TodoItem({ value, id, onDelete, onUpdate }) {
         <>
           <input
             type="text"
-            value={editValue}
-            onChange={(e) => setEditValue(e.target.value)}
+            title={editTitle}
+            onChange={(e) => setEditTitle(e.target.value)}
           />
           <button type="button" onClick={handleSave}>
             저장
@@ -27,7 +27,7 @@ export default function TodoItem({ value, id, onDelete, onUpdate }) {
         </>
       ) : (
         <>
-          {value}
+          {title}
           <button type="button" onClick={() => onDelete(id)}>
             삭제
           </button>

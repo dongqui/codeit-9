@@ -1,9 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
+import "../api.js";
+import { getTodoList } from "../api.js";
 
 export default function App() {
   const [todoList, setTodoList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getTodoList();
+        setTodoList(data);
+      } catch (error) {
+        console.log("데이터를 불러오는데 실패하였습니다.");
+      }
+    };
+    fetchData();
+    console.log(todoList);
+  }, []);
 
   const addTodo = (list) => {
     setTodoList([list, ...todoList]);
@@ -28,7 +43,7 @@ export default function App() {
           <TodoItem
             key={todo.id}
             id={todo.id}
-            value={todo.value}
+            title={todo.title}
             onDelete={onDelete}
             onUpdate={onUpdate}
           />
