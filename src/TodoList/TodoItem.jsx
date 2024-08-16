@@ -21,7 +21,8 @@ export default function TodoItem({ item, onDelete, onEdit, isEditing, onModify }
 
   return (
     <li>
-      {isEditing ? <input type="text" value={inputValue} onChange={handleInputChange} onBlur={handleInputBlur} autoFocus /> : <span>{item.text}</span>}
+      {/* {isEditing ? <input type="text" value={inputValue} onChange={handleInputChange} onBlur={handleInputBlur} autoFocus /> : <span>{item.text}</span>} */}
+      {item.title}
       <button type="button" onClick={handleDeleteClick}>
         삭제
       </button>
