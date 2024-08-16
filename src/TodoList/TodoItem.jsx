@@ -1,4 +1,8 @@
-export default function TodoItem({ item, onDelete, onEdit }) {
+import { useState } from 'react';
+
+export default function TodoItem({ item, onDelete, onEdit, isEditing, onModify }) {
+  const [inputValue, setInputValue] = useState(item.text);
+
   const handleDeleteClick = () => {
     onDelete(item.id);
   };
@@ -6,9 +10,18 @@ export default function TodoItem({ item, onDelete, onEdit }) {
   const handleEditClick = () => {
     onEdit(item.id);
   };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleInputBlur = () => {
+    onModify(inputValue);
+  };
+
   return (
     <li>
-      {item.text}
+      {isEditing ? <input type="text" value={inputValue} onChange={handleInputChange} onBlur={handleInputBlur} autoFocus /> : <span>{item.text}</span>}
       <button type="button" onClick={handleDeleteClick}>
         삭제
       </button>
