@@ -2,12 +2,11 @@ import { useState } from "react";
 
 let id = 0;
 
-export default function TodoInput({ addTodo, inputChange }) {
+export default function TodoInput({ addTodo }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
-    inputChange(inputValue);
   };
 
   const handleOnClick = () => {
