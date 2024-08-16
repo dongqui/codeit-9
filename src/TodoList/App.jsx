@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import { getTodos } from "./api";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-  setTodos(getTodos);
+
+  const getTodosByApi = async () => {
+    const response = await fetch("/todos");
+    const data = await response.json();
+    setTodos(data);
+  };
+
+  useEffect(() => {
+    getTodosByApi();
+  }, []);
 
   const handleAddTodo = (addTodo) => {
     setTodos([...todos, addTodo]);
@@ -31,7 +39,7 @@ export default function App() {
           <TodoItem
             key={todo.id}
             item={todo}
-            text={todo.text}
+            text={todo.title}
             handleDeleteTodo={handleDeleteTodo}
             handleUpdateTodo={handleUpdateTodo}
           />
