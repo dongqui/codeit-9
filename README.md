@@ -5,7 +5,7 @@
 ```
 [
     {
-        id: string,
+        id: number,
         title: string,
     }
 ]
@@ -25,7 +25,7 @@
 
 ```
 {
-    id: string,
+    id: number,
     title: string
 }
 ```
@@ -36,7 +36,7 @@
 
 ```
 {
-    id: string,
+    id: number,
 }
 ```
 
