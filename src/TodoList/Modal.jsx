@@ -17,18 +17,26 @@ function Modal({ title, onSave, onClose }) {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      onSave(inputValue);
+      if (!inputValue.trim()) {
+        alert("할 일을 입력하세요.");
+        return;
+      }
+      onSave(inputValue.trim());
     }
   };
 
   const handleSaveClick = () => {
-    onSave(inputValue);
+    if (!inputValue.trim()) {
+      alert("할 일을 입력하세요.");
+      return;
+    }
+    onSave(inputValue.trim());
   };
 
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>{title ? "수정" : "등록"}</h2>
+        <h2>수정하기</h2>
         <input
           type="text"
           ref={inputRef}
