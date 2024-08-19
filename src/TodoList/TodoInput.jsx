@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-let id = 0;
+import { v4 as uuidv4 } from "uuid";
 
 export default function TodoInput({ onAdd }) {
   const [inputValue, setInputValue] = useState("");
@@ -9,16 +8,25 @@ export default function TodoInput({ onAdd }) {
     setInputValue(e.target.value);
   };
 
+  const handleInputEnter = (e) => {
+    e.preventDefault();
+    if (e.key === "Enter") handleInputClick();
+  };
+
   const handleInputClick = () => {
     if (inputValue) {
-      onAdd({ id: id++, text: inputValue });
+      onAdd({ id: uuidv4(), title: inputValue });
       setInputValue("");
     }
   };
 
   return (
     <>
-      <input value={inputValue} onChange={handleInputChange} />
+      <input
+        value={inputValue}
+        onChange={handleInputChange}
+        onKeyDown={handleInputEnter}
+      />
       <button onClick={handleInputClick}>입력</button>
     </>
   );
