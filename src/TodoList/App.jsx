@@ -5,8 +5,26 @@ import TodoItem from "./TodoItem";
 export default function App() {
   const [toDoList, setToDoList] = useState([]);
   
-  const onSubmit = (id, title) => {
-    setToDoList((prevToDo) => [...prevToDo, { id: id++, title }]);
+  const onSubmit = async (title) => {
+    try {
+      const response = await fetch("/todos", {
+        method: "POST",
+        body: JSON.stringify({ title }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("onSubmit POST 요청에서 오류 발생");
+      }
+
+      const data = await response.json();
+
+      setToDoList((prevToDo) => [...prevToDo, { id: data.id, title: data.title }]);
+    } catch (error) {
+      console.error("onSubmit POST 요청에서 오류 발생", error);
+    }
   };
 
   const onDeleteToDoList = (id) => {
@@ -24,11 +42,14 @@ export default function App() {
       try {
         const response = await fetch("/todos");
 
+        if (!response.ok) {
+          throw new Error("getData에서 오류 발생");
+        }
+
         const data = await response.json();
         setToDoList(data);
-        
       } catch (error) {
-        console.error("getDate에서 오류 발생", error);
+        console.error("getData에서 오류 발생", error);
       }
     }
 

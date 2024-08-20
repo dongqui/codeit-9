@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-let id = 0;
-
 export default function TodoInput({ onSubmit }) {
   const [toDo, setToDo] = useState("");
 
@@ -12,8 +10,7 @@ export default function TodoInput({ onSubmit }) {
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    id = id + 1;
-    onSubmit(id, toDo);
+    onSubmit(toDo);
   };
 
   return (
