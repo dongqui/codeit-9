@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function TodoInput({ onAdd }) {
+export default function TodoInput({ onAdd, disabled }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e) => {
@@ -8,7 +8,6 @@ export default function TodoInput({ onAdd }) {
   };
 
   const handleInputEnter = (e) => {
-    e.preventDefault();
     if (e.key === "Enter") handleInputClick();
   };
 
@@ -22,11 +21,15 @@ export default function TodoInput({ onAdd }) {
   return (
     <>
       <input
+        autoFocus
         value={inputValue}
         onChange={handleInputChange}
         onKeyDown={handleInputEnter}
+        disabled={disabled}
       />
-      <button onClick={handleInputClick}>입력</button>
+      <button onClick={handleInputClick} disabled={disabled}>
+        입력
+      </button>
     </>
   );
 }

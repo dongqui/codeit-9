@@ -9,12 +9,16 @@ function Modal({ title, onSave, onClose }) {
   };
 
   const handleKeyDown = (e) => {
+    console.log(e.key);
     if (e.key === "Enter") {
       if (!inputValue.trim()) {
         alert("할 일을 입력하세요.");
         return;
       }
       onSave(inputValue.trim());
+    }
+    if (e.key === "Escape") {
+      onClose();
     }
   };
 

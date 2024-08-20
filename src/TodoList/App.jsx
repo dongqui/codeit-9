@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 import Modal from "./Modal";
+import "./App.css";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -67,19 +68,24 @@ export default function App() {
   };
 
   return (
-    <div>
-      <TodoInput onAdd={handleAddTodo} />
-      <ul>
-        {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            item={todo}
-            title={todo.title}
-            onDeleteTodo={handleDeleteTodo}
-            onEditTodo={handleOpenModal}
-          />
-        ))}
-      </ul>
+    <div className="wrapper">
+      <div className="todo-list">
+        <div className="add-todo">
+          <TodoInput onAdd={handleAddTodo} disabled={isModalOpen} />
+        </div>
+        <ul>
+          {todos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              item={todo}
+              title={todo.title}
+              onDeleteTodo={handleDeleteTodo}
+              onEditTodo={handleOpenModal}
+              disabled={isModalOpen}
+            />
+          ))}
+        </ul>
+      </div>
       {isModalOpen && (
         <Modal
           title={currentTodo.title}
