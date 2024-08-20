@@ -14,9 +14,22 @@ export default function App() {
 		const newTodo = await response.json();
 		setTodos([...todos, newTodo]);
 	};
+
+	const editTodo = async({id, title}) => {
+		const response = await fetch('/todos', {
+			method: "PATCH",
+			body: JSON.stringify({title})
+		})
+		if(response.ok) {
+			const editedTodo = await response.json();
+			setTodos(todos.map((todo) => (todo.id === id ? editedTodo : todo)));
+		}
+	};
+
 	// const handleAddTodo = (newTodo) => {
 	// 	setTodos([...todos, newTodo]);
 	// };
+
 	const handleDelete = (id) => {
 		const nextTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(nextTodos);
@@ -41,7 +54,12 @@ export default function App() {
       <TodoInput onAdd={addTodo} onEdit={handleModify} />
       <ul>
 				{todos.map((todo) => (
-					<TodoItem key={todo.id} item={todo} onDelete={handleDelete} />
+					<TodoItem 
+						key={todo.id} 
+						item={todo} 
+						onDelete={handleDelete} 
+						onEidit={editTodo}
+					/>
 				))}  
       </ul>
     </div>

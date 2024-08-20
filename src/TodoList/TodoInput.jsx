@@ -16,7 +16,7 @@ export default function TodoInput({ onAdd }) {
 
 	const handleInputClick = () => {
 		if (inputValue) {
-		onAdd({ id: id++, text: inputValue });
+		onAdd(inputValue);
 		setInputValue('');
 		}
 	};
