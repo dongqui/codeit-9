@@ -1,9 +1,4 @@
-// 임시코드
-// 리액트 배열 사용 key
-// id += 1;
 import { useState } from 'react';
-
-let id = 5;
 
 export default function TodoInput({ onAdd }) {
   const [inputValue, setInputValue] = useState('');
@@ -12,7 +7,7 @@ export default function TodoInput({ onAdd }) {
 
   const handleInputSubmit = () => {
     if (inputValue) {
-      onAdd({ id: ++id, title: inputValue });
+      onAdd({ title: inputValue });
       setInputValue('');
     }
   };
