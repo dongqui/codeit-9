@@ -1,22 +1,23 @@
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 import { useEffect, useState } from "react";
-import { getTodoList, createTodo } from "./api";
+import { getTodoList, createTodo, updateTodo } from "./api";
 
 export default function App() {
   const [list, setList] = useState([]);
 
   const handleInput = async (inputVal) => {
     const newTodo = await createTodo(inputVal);
-    // setList([...list, inputVal]);
+    setList([...list, newTodo]);
   };
 
-  const handleModifyInput = (targetValue) => {
-    const modifiedList = list.map((item) =>
-      item.id === targetValue.id ? { ...item, title: targetValue.title } : item
-    );
+  const handleModifyInput = async (targetValue) => {
+    // const modifiedList = list.map((item) =>
+    //   item.id === targetValue.id ? { ...item, title: targetValue.title } : item
+    // );
+    const updateTodo = await updateTodo(targetValue);
 
-    setList(modifiedList);
+    setList([...list, updateTodo]);
   };
 
   const handleDelete = (id) => {

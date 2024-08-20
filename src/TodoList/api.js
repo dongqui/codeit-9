@@ -7,7 +7,17 @@ export const getTodoList = async () => {
 export const createTodo = async (data) => {
   const response = await fetch("/todos", {
     method: "POST",
-    body: JSON.stringify({ data }),
+    body: JSON.stringify({ title: data }),
+  });
+
+  const body = await response.json();
+  return body;
+};
+
+export const updateTodo = async (data) => {
+  const response = await fetch(`/todos/${data.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ title: data.title }),
   });
 
   const body = await response.json();

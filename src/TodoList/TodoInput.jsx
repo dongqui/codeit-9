@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-let id = 0;
-
 export default function TodoInput({ onClick }) {
   const [value, setValue] = useState("");
 
