@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import { getTodos, updateTodos } from "./api";
+import { deleteTodo, getTodos, postTodos, updateTodos } from "./api";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -45,7 +45,23 @@ export default function App() {
     }
   };
 
-  const handlePost = async (title) => {};
+  const handleSubmit = async (title) => {
+    try {
+      const newTodo = await postTodos(title);
+      handleTodoSubmit(newTodo);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const deleteTodoId = await deleteTodo(id);
+      onDelete(deleteTodoId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     handleFetch();
@@ -53,7 +69,7 @@ export default function App() {
 
   return (
     <div>
-      <TodoInput onSubmit={handleTodoSubmit} />
+      <TodoInput onSubmit={handleSubmit} />
       <ul>
         {todos?.map((todo) => (
           <TodoItem
@@ -61,7 +77,7 @@ export default function App() {
             id={todo.id}
             title={todo.title}
             onUpdate={handleUpdate}
-            onDelete={onDelete}
+            onDelete={handleDelete}
           />
         ))}
       </ul>

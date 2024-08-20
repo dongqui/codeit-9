@@ -36,3 +36,16 @@ export async function updateTodos(id, title) {
   const data = await response.json();
   return data;
 }
+
+export async function deleteTodo(id) {
+  const response = await fetch(`todos/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete todo");
+  }
+
+  const data = await response.json();
+  return data.id;
+}
