@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 export default function TodoInput({ onAdd }) {
   const [inputValue, setInputValue] = useState("");
@@ -15,7 +14,7 @@ export default function TodoInput({ onAdd }) {
 
   const handleInputClick = () => {
     if (inputValue) {
-      onAdd({ id: uuidv4(), title: inputValue });
+      onAdd({ title: inputValue });
       setInputValue("");
     }
   };

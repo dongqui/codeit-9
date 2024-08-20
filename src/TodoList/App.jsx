@@ -18,8 +18,16 @@ export default function App() {
     getTodosByApi();
   }, []);
 
-  const handleAddTodo = (addTodo) => {
-    setTodos([...todos, addTodo]);
+  const handleAddTodo = async (addTodo) => {
+    const response = await fetch("/todos", {
+      method: "POST",
+      body: JSON.stringify({ title: addTodo.title }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    setTodos([...todos, data]);
   };
 
   const handleDeleteTodo = (targetId) => {
