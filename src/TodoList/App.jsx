@@ -27,7 +27,7 @@ export default function App() {
   };
 
   const patchApi = async (modifiedTodo) => {
-    const response = await axios.patch(`/todos/${modifiedTodo.id}`, modifiedTodo);
+    const response = await axios.patch(`/todos/${modifiedTodo.id}`, { title: modifiedTodo.title });
     setTodos(todos.map((todo) => (todo.id === modifiedTodo.id ? response.data : todo)));
   };
 
