@@ -23,3 +23,12 @@ export const updateTodo = async (data) => {
   const body = await response.json();
   return body;
 };
+
+export const deleteTodo = async (id) => {
+  const response = await fetch(`/todos/${id}`, {
+    method: "DELETE",
+  });
+
+  const body = await response.json();
+  return body;
+};

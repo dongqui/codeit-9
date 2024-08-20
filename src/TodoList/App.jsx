@@ -1,7 +1,7 @@
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 import { useEffect, useState } from "react";
-import { getTodoList, createTodo, updateTodo } from "./api";
+import { getTodoList, createTodo, updateTodo, deleteTodo } from "./api";
 
 export default function App() {
   const [list, setList] = useState([]);
@@ -18,12 +18,17 @@ export default function App() {
 
     const updatedTodo = await updateTodo(targetValue);
 
-    setList([...modifiedList, updatedTodo]);
+    setList([updatedTodo, ...modifiedList]);
   };
 
-  const handleDelete = (id) => {
-    const newList = list.filter((item) => item.id !== id);
-    setList(newList);
+  const handleDeleteClick = async (id) => {
+    const deleteItem = await deleteTodo(id);
+
+    const deletedList = list.filter((item) => {
+      return item.id !== deleteItem.id;
+    });
+
+    setList(deletedList);
   };
 
   useEffect(() => {
@@ -43,7 +48,7 @@ export default function App() {
           <TodoItem
             key={item.id}
             item={item}
-            clickDelete={handleDelete}
+            clickDelete={handleDeleteClick}
             clickModify={handleModifyClick}
           />
         ))}
