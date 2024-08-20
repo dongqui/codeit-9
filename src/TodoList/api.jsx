@@ -4,25 +4,25 @@ export async function getTodo() {
   return body;
 }
 
-export async function postTodo(text) {
+export async function postTodo(title) {
   const res = await fetch("/todos", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ text }),
+    body: JSON.stringify({ title }),
   });
   const data = await res.json();
   return data;
 }
 
-export async function updateTodo(id, text) {
+export async function updateTodo(id, title) {
   const res = await fetch(`/todos/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ text }),
+    body: JSON.stringify({ title }),
   });
   const data = await res.json();
   return data;
