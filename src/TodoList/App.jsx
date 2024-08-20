@@ -36,7 +36,7 @@ export default function App() {
     const updatedTodo = await updateTodo(id, editingText);
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, text: updatedTodo.text } : todo
+        todo.id === id ? { ...todo, title: updatedTodo.title } : todo
       )
     );
     setEditingId(null);
