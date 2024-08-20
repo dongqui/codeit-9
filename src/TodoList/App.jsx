@@ -26,6 +26,11 @@ export default function App() {
     setTodos([...todos, response.data]);
   };
 
+  const patchApi = async (modifiedTodo) => {
+    const response = await axios.patch(`/todos/${modifiedTodo.id}`, modifiedTodo);
+    setTodos(todos.map((todo) => (todo.id === modifiedTodo.id ? response.data : todo)));
+  };
+
   const handleAddTodo = (newTodo) => postAPI(newTodo);
 
   const handleDelete = (id) => {
@@ -33,10 +38,7 @@ export default function App() {
     setTodos(updatedTodos);
   };
 
-  const handleModify = (modifiedTodo) => {
-    const modifiedTodos = todos.map((todo) => (todo.id === modifiedTodo.id ? modifiedTodo : todo));
-    setTodos(modifiedTodos);
-  };
+  const handleModify = (modifiedTodo) => patchApi(modifiedTodo);
 
   useEffect(() => {
     getAPI();
