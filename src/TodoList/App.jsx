@@ -8,7 +8,7 @@ export default function App() {
 
   const handleOnClick = async (title) => {
     const newTodo = await postTodo(title);
-    handleOnClick(newTodo);
+    setTodoList([...todoList, newTodo]);
   };
 
   useEffect(() => {
