@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
+import axios from 'axios';
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -11,13 +12,18 @@ export default function App() {
     setTodos(data);
   };
 
+  // const postAPI = async (newTodo) => {
+  //   const response = await fetch('/todos', {
+  //     method: 'POST',
+  //     body: JSON.stringify(newTodo),
+  //   });
+  //   const data = await response.json();
+  //   setTodos([...todos, data]);
+  // };
+  //axios
   const postAPI = async (newTodo) => {
-    const response = await fetch('/todos', {
-      method: 'POST',
-      body: JSON.stringify(newTodo),
-    });
-    const data = await response.json();
-    setTodos([...todos, data]);
+    const response = await axios.post('/todos', newTodo);
+    setTodos([...todos, response.data]);
   };
 
   const handleAddTodo = (newTodo) => postAPI(newTodo);
