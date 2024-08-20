@@ -8,7 +8,7 @@ export default function TodoInput({ onSubmit, onCancel, editId }) {
 
     const handleOnClick = () => {
         if (editId) {
-            onSubmit({ id: editId, title: title });
+            onSubmit(editId, title);
         } else {
             onSubmit({ title: title });
         }

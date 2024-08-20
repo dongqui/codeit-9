@@ -23,11 +23,20 @@ export default function App() {
         setItems([...nextItems]);
     };
 
-    const handleUpdate = (product) => {
-        const splitIdx = items.findIndex((item) => item.id === product.id);
+    const handleUpdate = async (id, title) => {
+        const splitIdx = items.findIndex((item) => item.id === id);
+        const response = await fetch(`/todos/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify({ title }),
+        });
+        if (!response.ok) {
+            throw new Error("데이터를 생성하는데 실패했습니다");
+        }
+        const newItem = await response.json();
+        console.log(newItem);
         setItems((prevItems) => [
             ...prevItems.slice(0, splitIdx),
-            product,
+            newItem,
             ...prevItems.slice(splitIdx + 1),
         ]);
         setEditId(null);
