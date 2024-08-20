@@ -4,7 +4,7 @@ import TodoItem from "./TodoItem";
 
 export default function App() {
   const [toDoList, setToDoList] = useState([]);
-  
+  console.log(toDoList)
   const onSubmit = async (title) => {
     try {
       const response = await fetch("/todos", {
@@ -21,20 +21,45 @@ export default function App() {
 
       const data = await response.json();
 
-      setToDoList((prevToDo) => [...prevToDo, { id: data.id, title: data.title }]);
+      setToDoList((prevToDo) => [...prevToDo, data]);
     } catch (error) {
       console.error("onSubmit POST 요청에서 오류 발생", error);
     }
   };
 
-  const onDeleteToDoList = (id) => {
-    setToDoList((prevList) => prevList.filter((item) => item.id !== id));
+  const onDeleteToDoList = async (id) => {
+    try {
+      const response = await fetch(`/todos/${id}`, {
+        method: "DELETE"
+      });
+
+      if (!response.ok) {
+        throw new Error("onDeleteToDoList DELETE 요청에서 오류 발생");
+      }
+
+      setToDoList((prevList) => prevList.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("onDeleteToDoList DELETE 요청에서 오류 발생", error);
+    }
   };
 
-  const onEditToDoList = (id, newTitle) => {
-    setToDoList((prevList) =>
-      prevList.map((item) => (item.id === id ? { ...item, title: newTitle } : item))
-    );
+  const onEditToDoList = async (id, newTitle) => {
+    try {
+      const response = await fetch(`/todos/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ newTitle }),
+      });
+
+      if (!response.ok) {
+        throw new Error("onEditToDoList PATCH 요청에서 오류 발생");
+      }
+
+      setToDoList((prevList) =>
+        prevList.map((item) => (item.id === id ? { ...item, title: newTitle } : item))
+      );
+    } catch (error) {
+      console.error("onEditToDoList PATCH 요청에서 오류 발생", error);
+    }
   };
 
   useEffect(() => {
