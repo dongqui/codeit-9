@@ -1,15 +1,10 @@
 import { useState } from "react";
 
-let id = 0;
-
 export default function TodoInput({ onSubmit }) {
   const [title, setTitle] = useState();
 
   const handleClick = () => {
-    onSubmit({
-      id: id++,
-      title: title,
-    });
+    onSubmit(title);
   };
 
   const handleInput = (e) => {

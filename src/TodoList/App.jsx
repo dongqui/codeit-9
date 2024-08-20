@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 import "../api.js";
-import { createTodoList, getTodoList } from "../api.js";
+import {
+  createTodoList,
+  deleteTodoList,
+  getTodoList,
+  updateTodo,
+} from "../api.js";
 
 export default function App() {
   const [todoList, setTodoList] = useState([]);
@@ -20,20 +25,19 @@ export default function App() {
     // console.log(todoList);
   }, []);
 
-  const addTodo = async (list) => {
-    const result = await createTodoList(list.id, list.title);
+  const addTodo = async (title) => {
+    const result = await createTodoList(title);
     setTodoList([result, ...todoList]);
   };
-  const onDelete = (id) => {
+
+  const onDelete = async (id) => {
+    await deleteTodoList(id);
     setTodoList(todoList.filter((todoItem) => todoItem.id !== id));
   };
 
-  const onUpdate = (id, newValue) => {
-    setTodoList(
-      todoList.map((todo) =>
-        todo.id === id ? { ...todo, value: newValue } : todo
-      )
-    );
+  const onUpdate = async (id, newValue) => {
+    const updatedTodo = await updateTodo(id, newValue);
+    setTodoList(todoList.map((todo) => (todo.id === id ? updatedTodo : todo)));
   };
 
   return (

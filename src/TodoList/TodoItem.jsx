@@ -15,7 +15,7 @@ export default function TodoItem({ title, id, onDelete, onUpdate }) {
         <>
           <input
             type="text"
-            title={editTitle}
+            value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
           />
           <button type="button" onClick={handleSave}>
