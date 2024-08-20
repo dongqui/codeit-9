@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTodo, postTodo } from "./api.js";
+import { getTodo, postTodo, updateTodo } from "./api.js";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
@@ -19,21 +19,14 @@ export default function App() {
     getData();
   }, []);
 
-  // const handleOnClick = (newTodo) => {
-  //   setTodoList([...todoList, newTodo]);
-  // };
-
   const handleDelete = (id) => {
     const nextTodoList = todoList.filter((item) => item.id !== id);
     setTodoList(nextTodoList);
   };
 
-  const handleEdit = (id, newValue) => {
-    setTodoList((prevTodoList) => {
-      prevTodoList.map((item) =>
-        item.id === id ? { ...item, value: newValue } : item
-      );
-    });
+  const handleUpdate = async (id, title) => {
+    const nextTodo = await updateTodo(id, title);
+    setTodoList(todoList.map((todo) => (todo.id === id ? nextTodo : todo)));
   };
 
   return (
@@ -45,6 +38,7 @@ export default function App() {
             key={todo.id}
             value={todo.value}
             id={todo.id}
+            onSubmit={handleUpdate}
             onDelete={handleDelete}
           />
         ))}

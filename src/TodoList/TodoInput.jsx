@@ -10,10 +10,7 @@ export default function TodoInput({ onSubmit }) {
   };
 
   const handleOnClick = () => {
-    onSubmit({
-      id: id++,
-      title: todo,
-    });
+    onSubmit(title);
   };
 
   return (
