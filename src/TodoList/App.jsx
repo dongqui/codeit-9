@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
-import { getTodoList } from './api';
+import { getTodoList, postTodoList, patchTodoList } from './api';
 
 export default function App() {
   const [todoList, setTodoList] = useState([]);
@@ -15,21 +15,23 @@ export default function App() {
     fetchTodoList();
   }, []);
 
-  const addTodo = todo => {
-    setTodoList([...todoList, todo]);
+  const onSubmit = async title => {
+    const newTodo = await postTodoList(title);
+    setTodoList([...todoList, newTodo]);
   };
 
-  const onDelete = id => {
-    setTodoList(todoList.filter(todo => todo.id !== id));
+  const onDelete = async id => {
+    setTodoList(todoList.filter(todo => Number(todo.id) !== Number(id)));
   };
 
-  const onUpdate = (id, newTodo) => {
-    setTodoList(todoList.map(todo => (todo.id === id ? { ...todo, title: newTodo } : todo)));
+  const onUpdate = async (id, updateTodo) => {
+    const updateTodos = await patchTodoList();
+    setTodoList(updateTodos.map(todo => (Number(todo.id) === Number(id) ? { ...todo, title: updateTodo } : todo)));
   };
 
   return (
     <div>
-      <TodoInput addTodo={addTodo} />
+      <TodoInput onSubmit={onSubmit} />
       <ul>
         {todoList.map(todo => (
           <TodoItem key={todo.id} todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
