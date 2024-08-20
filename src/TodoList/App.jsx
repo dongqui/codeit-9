@@ -11,7 +11,16 @@ export default function App() {
     setTodos(data);
   };
 
-  const handleAddTodo = (newTodo) => setTodos([...todos, newTodo]);
+  const postAPI = async (newTodo) => {
+    const response = await fetch('/todos', {
+      method: 'POST',
+      body: JSON.stringify(newTodo),
+    });
+    const data = await response.json();
+    setTodos([...todos, data]);
+  };
+
+  const handleAddTodo = (newTodo) => postAPI(newTodo);
 
   const handleDelete = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);

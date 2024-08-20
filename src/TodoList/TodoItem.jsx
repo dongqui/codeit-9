@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 export default function TodoItem({ item, onDelete, onModify }) {
+  console.log('TodoItem render', item);
+
   const [inputValue, setInputValue] = useState(item.title);
   const [isEditing, setIsEditing] = useState(false);
 
