@@ -7,7 +7,7 @@ export const getTodoList = async () => {
 export const createTodo = async (data) => {
   const response = await fetch("/todos", {
     method: "POST",
-    body: data,
+    body: JSON.stringify({ data }),
   });
 
   const body = await response.json();
