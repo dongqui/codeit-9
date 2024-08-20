@@ -1,32 +1,42 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-
-let nextId = 1;
+import { getTodo, postTodo, updateTodo, deleteTodo } from "./api";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
 
-  const addTodo = (text) => {
-    setTodos([...todos, { id: nextId, text }]);
-    nextId++;
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const todosData = await getTodo();
+      setTodos(todosData);
+    };
+
+    fetchTodos();
+  }, []);
+
+  const addTodo = async (title) => {
+    const newTodo = await postTodo(title);
+    setTodos([...todos, newTodo]);
   };
 
-  const deleteTodo = (id) => {
+  const deleteTodoHandle = async (id) => {
+    await deleteTodo(id);
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const editTodo = (id, text) => {
+  const editTodo = (id, title) => {
     setEditingId(id);
-    setEditingText(text);
+    setEditingText(title);
   };
 
-  const saveEditTodo = (id) => {
+  const saveEditTodo = async (id) => {
+    const updatedTodo = await updateTodo(id, editingText);
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, text: editingText } : todo
+        todo.id === id ? { ...todo, text: updatedTodo.text } : todo
       )
     );
     setEditingId(null);
@@ -46,8 +56,8 @@ export default function App() {
           <TodoItem
             key={todo.id}
             id={todo.id}
-            text={todo.text}
-            onDelete={deleteTodo}
+            text={todo.title}
+            onDelete={deleteTodoHandle}
             onEdit={editTodo}
             onSaveEdit={saveEditTodo}
             onCancelEdit={cancelEditTodo}
