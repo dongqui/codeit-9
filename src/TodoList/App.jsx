@@ -1,37 +1,47 @@
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function App() {
 	const [todos, setTodos] = useState([]);
-	const [currentTodo, setCurrentTodo] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
 
-	const handleAddTodo = (newTodo) => {
+
+	const addTodo = async(title) => {
+		const response = await fetch('/todos', {
+			method: "POST",
+			body: JSON.stringify({title})
+		})
+		const newTodo = await response.json();
 		setTodos([...todos, newTodo]);
 	};
-
+	// const handleAddTodo = (newTodo) => {
+	// 	setTodos([...todos, newTodo]);
+	// };
 	const handleDelete = (id) => {
-		const nextTodos = todos.filter((todos) => todos.id !== id);
+		const nextTodos = todos.filter((todo) => todo.id !== id);
 		setTodos(nextTodos);
 	};
-
-	const handleEditClick = (id) => {
-		const todoEdit = todos.find((todo) => todo.id === id);
-		setCurrentTodo(todoEdit);
-	}
-
 	const handleModify = (modifiedTodo) => {
-		const modifyedTodos = todos.map((todo) => (todo.id === modifiedTodo.id ? modifiedTodo : todo));
-		setTodos(modifyedTodos);
-	}
+    const modifiedTodos = todos.map((todo) => (todo.id === modifiedTodo.id ? modifiedTodo : todo));
+    setTodos(modifiedTodos);
+  };
+
+	useEffect(() => {
+		const getAPI = async () => {
+			const response = await fetch('/todos');
+			const data = await response.json();
+			setTodos(data);
+		};
+
+		getAPI();
+	}, []);
 
   return (
     <div>
-      <TodoInput onAdd={handleAddTodo} currentTodo={currentTodo} onEdit={handleModify} />
+      <TodoInput onAdd={addTodo} onEdit={handleModify} />
       <ul>
 				{todos.map((todo) => (
-					<TodoItem key={todo.id} item={todo} onDelete={handleDelete} onEdit={handleEditClick}/>
+					<TodoItem key={todo.id} item={todo} onDelete={handleDelete} />
 				))}  
       </ul>
     </div>
