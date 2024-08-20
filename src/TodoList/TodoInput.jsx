@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-let id = 0;
-
 export default function TodoInput({ onSubmit, onCancel, editId }) {
     const [title, setTitle] = useState();
     const handleChange = (e) => {
@@ -12,7 +10,7 @@ export default function TodoInput({ onSubmit, onCancel, editId }) {
         if (editId) {
             onSubmit({ id: editId, title: title });
         } else {
-            onSubmit({ id: id++, title: title });
+            onSubmit({ title: title });
         }
     };
 

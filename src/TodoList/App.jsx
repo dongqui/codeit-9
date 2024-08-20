@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
-import handlers from "./TodoMockServer/handlers";
 
 export default function App() {
     const [items, setItems] = useState([]);
     const [editId, setEditId] = useState(null);
 
-    const handleSubmit = (item) => {
-        setItems((prevItems) => [item, ...prevItems]);
+    const handleSubmit = async (item) => {
+        const response = await fetch(`/todos`, {
+            method: "POST",
+            body: JSON.stringify(item),
+        });
+        if (!response.ok) {
+            throw new Error("데이터를 생성하는데 실패했습니다");
+        }
+        const newItem = await response.json();
+        setItems((prevItems) => [...prevItems, newItem]);
     };
 
     const handleDelete = (id) => {
