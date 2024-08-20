@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import { getTodo } from "./api.js";
+import { getTodo, postTodo } from "./api.js";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
 export default function App() {
   const [todoList, setTodoList] = useState([]);
+
+  const handleOnClick = async (title) => {
+    const newTodo = await postTodo(title);
+    handleOnClick(newTodo);
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -14,9 +19,9 @@ export default function App() {
     getData();
   }, []);
 
-  const handleOnClick = (newTodo) => {
-    setTodoList([...todoList, newTodo]);
-  };
+  // const handleOnClick = (newTodo) => {
+  //   setTodoList([...todoList, newTodo]);
+  // };
 
   const handleDelete = (id) => {
     const nextTodoList = todoList.filter((item) => item.id !== id);
