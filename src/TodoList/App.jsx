@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 import "../api.js";
-import { getTodoList } from "../api.js";
+import { createTodoList, getTodoList } from "../api.js";
 
 export default function App() {
   const [todoList, setTodoList] = useState([]);
@@ -17,11 +17,12 @@ export default function App() {
       }
     };
     fetchData();
-    console.log(todoList);
+    // console.log(todoList);
   }, []);
 
-  const addTodo = (list) => {
-    setTodoList([list, ...todoList]);
+  const addTodo = async (list) => {
+    const result = await createTodoList(list.id, list.title);
+    setTodoList([result, ...todoList]);
   };
   const onDelete = (id) => {
     setTodoList(todoList.filter((todoItem) => todoItem.id !== id));
