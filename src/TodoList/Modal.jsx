@@ -1,15 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import "./Modal.css";
 
 function Modal({ title, onSave, onClose }) {
   const [inputValue, setInputValue] = useState(title);
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -39,7 +32,7 @@ function Modal({ title, onSave, onClose }) {
         <h2>수정하기</h2>
         <input
           type="text"
-          ref={inputRef}
+          autoFocus
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
