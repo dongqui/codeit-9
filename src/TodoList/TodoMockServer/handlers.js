@@ -33,7 +33,7 @@ const deleteTodo = http.delete("/todos/:id", ({ params }) => {
   return HttpResponse.json({ id: Number(params.id) }, { status: 202 });
 });
 
-const putTodo = http.patch("/todos/:id", async ({ params, request }) => {
+const patchTodo = http.patch("/todos/:id", async ({ params, request }) => {
   const todo = data.find((d) => d.id === Number(params.id));
   const newTodo = await request.json();
   todo.title = newTodo.title;
@@ -51,7 +51,7 @@ const postTodo = http.post("/todos", async ({ request }) => {
   return HttpResponse.json(todo, { status: 201 });
 });
 
-const handlers = [getTodos, putTodo, deleteTodo, postTodo];
+const handlers = [getTodos, patchTodo, deleteTodo, postTodo];
 
 export default handlers;
 

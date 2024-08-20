@@ -24,6 +24,7 @@ export default function App() {
       body: JSON.stringify({ title: addTodo.title }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Basic YWxhZGRpbjpvcGVuc2VzYW1l", // Token
       },
     });
     const data = await response.json();
@@ -47,10 +48,19 @@ export default function App() {
     setIsModalOpen(false);
   };
 
-  const handleUpdateTodo = (title) => {
+  const handleUpdateTodo = async (title) => {
     const id = currentTodo.id;
+    const response = await fetch(`/todos/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ title }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic YWxhZGRpbjpvcGVuc2VzYW1l", // Token
+      },
+    });
+    const data = await response.json();
     const updatedTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, title: title } : todo
+      todo.id === data.id ? { ...todo, title: title } : todo
     );
     setTodos(updatedTodos);
     handleCloseModal();
