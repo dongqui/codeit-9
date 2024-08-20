@@ -11,13 +11,14 @@ export default function App() {
     setList([...list, newTodo]);
   };
 
-  const handleModifyInput = async (targetValue) => {
-    // const modifiedList = list.map((item) =>
-    //   item.id === targetValue.id ? { ...item, title: targetValue.title } : item
-    // );
-    const updateTodo = await updateTodo(targetValue);
+  const handleModifyClick = async (targetValue) => {
+    const modifiedList = list.filter((item) => {
+      return item.id !== targetValue.id;
+    });
 
-    setList([...list, updateTodo]);
+    const updatedTodo = await updateTodo(targetValue);
+
+    setList([...modifiedList, updatedTodo]);
   };
 
   const handleDelete = (id) => {
@@ -43,7 +44,7 @@ export default function App() {
             key={item.id}
             item={item}
             clickDelete={handleDelete}
-            clickModify={handleModifyInput}
+            clickModify={handleModifyClick}
           />
         ))}
       </ul>
